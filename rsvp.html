@@ -49,11 +49,11 @@
     <p class="deadline">The deadline to RSVP is April 20th.</p>
 
     <label for="search">Search for a family:</label>
-    <input type="text" id="search" placeholder="Start typing a name...">
+    <input type="text" id="search" placeholder="Start typing a name..." oninput="filterFamilies()">
     
     <!-- Family dropdown -->
     <label for="familyDropdown">Select your family:</label>
-    <select id="familyDropdown">
+    <select id="familyDropdown" onchange="showFamilyMembers()">
         <!-- Family names will be populated here dynamically -->
     </select>
     
@@ -68,70 +68,101 @@
 <script src="fade_script.js"></script>
 
 <script>
-     fetch('https://script.google.com/macros/s/AKfycby0jXnBXhsbEyH91le8ihSq4M4T5kBnTvYw4FKDn2_VhChdz8noFE61dJoFeORZ2-acWw/exec') // Replace with your actual URL
+    let familiesData = [];
+
+    // Fetch family data from Google Apps Script
+    fetch('https://script.google.com/macros/s/AKfycby0jXnBXhsbEyH91le8ihSq4M4T5kBnTvYw4FKDn2_VhChdz8noFE61dJoFeORZ2-acWw/exec')
         .then(response => response.json())
         .then(families => {
-            const familyMembersDiv = document.getElementById('familyMembers');
-            
-            families.forEach(family => {
-                const familyLabel = document.createElement('p');
-                familyLabel.textContent = `Family: ${family.familyId}`;
-                familyMembersDiv.appendChild(familyLabel);
-
-                family.members.forEach(member => {
-                    const checkbox = document.createElement('input');
-                    checkbox.type = 'checkbox';
-                    checkbox.name = 'attendees';
-                    checkbox.value = member;
-                    checkbox.id = member;
-
-                    const label = document.createElement('label');
-                    label.htmlFor = member;
-                    label.textContent = member;
-
-                    familyMembersDiv.appendChild(checkbox);
-                    familyMembersDiv.appendChild(label);
-                    familyMembersDiv.appendChild(document.createElement('br'));
-                });
-            });
+            familiesData = families;
+            populateFamilyDropdown(families);  // Populate family dropdown initially
         })
         .catch(error => {
             console.error('Error fetching families:', error);
         });
 
-        // Handle the form submission
-        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
+    // Function to populate the family dropdown
+    function populateFamilyDropdown(families) {
+        const familyDropdown = document.getElementById('familyDropdown');
+        familyDropdown.innerHTML = "<option value=''>-- Select a family --</option>";  // Clear existing options
 
-            const formData = new FormData(this);
-            const formObject = {};
-            formData.forEach((value, key) => {
-                if (key === 'attendees') {
-                    // Collect all selected attendees
-                    formObject[key] = formObject[key] || [];
-                    formObject[key].push(value);
-                } else {
-                    formObject[key] = value;
-                }
-            });
-
-            const googleScriptUrl = 'https://script.google.com/macros/s/AKfycby0jXnBXhsbEyH91le8ihSq4M4T5kBnTvYw4FKDn2_VhChdz8noFE61dJoFeORZ2-acWw/exec'; // Replace with your deployed URL
-
-            // Send the form data to Google Apps Script
-            fetch(googleScriptUrl, {
-                method: 'POST',
-                body: new URLSearchParams(formObject)
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert(data); // Show response from the Google Apps Script
-                document.getElementById('rsvpForm').reset(); // Reset the form
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('There was an error submitting your RSVP.');
-            });
+        families.forEach(family => {
+            const option = document.createElement('option');
+            option.value = family.familyId;
+            option.textContent = `Family ${family.familyId}`;
+            familyDropdown.appendChild(option);
         });
+    }
+
+    // Function to filter families based on the search input
+    function filterFamilies() {
+        const searchValue = document.getElementById('search').value.toLowerCase();
+        const filteredFamilies = familiesData.filter(family => 
+            family.members.some(member => member.toLowerCase().includes(searchValue))
+        );
+        
+        populateFamilyDropdown(filteredFamilies);
+        showFamilyMembers(filteredFamilies);  // Show family members for the filtered families
+    }
+
+    // Function to display family members when a family is selected
+    function showFamilyMembers(families = familiesData) {
+        const selectedFamilyId = document.getElementById('familyDropdown').value;
+        const selectedFamily = families.find(family => family.familyId == selectedFamilyId);
+        const familyMembersContainer = document.getElementById('familyMembersContainer');
+        familyMembersContainer.innerHTML = "";  // Clear previous checkboxes
+
+        if (selectedFamily) {
+            // Group family members together by family ID
+            selectedFamily.members.forEach(member => {
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = 'attendees';
+                checkbox.value = member;
+                checkbox.id = member;
+
+                const label = document.createElement('label');
+                label.htmlFor = member;
+                label.textContent = member;
+
+                familyMembersContainer.appendChild(checkbox);
+                familyMembersContainer.appendChild(label);
+                familyMembersContainer.appendChild(document.createElement('br'));
+            });
+        }
+    }
+
+    // Handle the form submission
+    document.getElementById('submitBtn').addEventListener('click', function(e) {
+        e.preventDefault();  // Prevent default button click behavior
+
+        const formData = new FormData();
+        const selectedMembers = Array.from(document.querySelectorAll('input[name="attendees"]:checked'))
+            .map(checkbox => checkbox.value);
+
+        if (selectedMembers.length === 0) {
+            alert("Please select at least one attendee.");
+            return;
+        }
+
+        formData.append('attendees', selectedMembers);
+        
+        // Sending form data to Google Apps Script
+        const googleScriptUrl = 'https://script.google.com/macros/s/AKfycby0jXnBXhsbEyH91le8ihSq4M4T5kBnTvYw4FKDn2_VhChdz8noFE61dJoFeORZ2-acWw/exec'; 
+
+        fetch(googleScriptUrl, {
+            method: 'POST',
+            body: new URLSearchParams(formData)
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data); // Show response from the Google Apps Script
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error submitting your RSVP.');
+        });
+    });
 </script>
 
 </body>
