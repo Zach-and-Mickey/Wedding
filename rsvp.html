@@ -7,27 +7,15 @@
     <link rel="stylesheet" href="style.css">
     <title>RSVP</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
         h1 {
             font-size: 4em;
         }
-
         p {
             font-size: 1.5em;
         }
-
         #familyMembers {
             margin: 20px 0;
         }
-
-        .checkbox-group div {
-            margin-bottom: 10px;
-        }
-
         button {
             padding: 10px;
             background-color: #4CAF50;
@@ -35,111 +23,106 @@
             border: none;
             cursor: pointer;
         }
-
         button:hover {
             background-color: #45a049;
         }
-
         .search {
             padding: 20px;
         }
-
-        /* Style for family names list */
-        .family-list div {
-            padding: 8px;
-            margin-bottom: 10px;
-            background-color: #f4f4f4;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .family-list div:hover {
-            background-color: #ddd;
-        }
-
     </style>
 </head>
 <body>
 
-    <header>
-        <a href="home.html">Home</a>
-        <a href="rsvp.html">RSVP</a>
-        <a href="registry.html">Registry</a>
-        <a href="funds.html">Honeymoon Fund</a>
-        <a href="faq.html">FAQs</a>
-    </header>
-    <main>
-        <h1>RSVP</h1>
-        <p class="main">Please fill out the form to RSVP to the wedding! The invitation included the names
-            of those invited and whether or not plus ones were being accomodated! Thank you
-            for understanding this is going to be a small wedding and not all can be invited!</p>
-        <p class="deadline">The deadline to RSVP is April 20th.</p>
+<header>
+    <a href="home.html">Home</a>
+    <a href="rsvp.html">RSVP</a>
+    <a href="registry.html">Registry</a>
+    <a href="funds.html">Honeymoon Fund</a>
+    <a href="faq.html">FAQs</a>
+</header>
 
-        <label for="search">Search for a family:</label>
-        <input type="text" id="search" placeholder="Start typing a name..." />
+<main>
+    <h1>RSVP</h1>
+    <p class="main">Please fill out the form to RSVP to the wedding! The invitation included the names
+        of those invited and whether or not plus ones were being accommodated! Thank you
+        for understanding this is going to be a small wedding and not all can be invited!</p>
+    <p class="deadline">The deadline to RSVP is April 20th.</p>
 
-        <!-- Family search result -->
-        <div id="familyList" class="family-list">
-            <!-- Matching families will be displayed here -->
-        </div>
+    <label for="search">Search for a family:</label>
+    <input type="text" id="search" placeholder="Start typing a name...">
+    
+    <!-- Family dropdown -->
+    <label for="familyDropdown">Select your family:</label>
+    <select id="familyDropdown">
+        <!-- Family names will be populated here dynamically -->
+    </select>
+    
+    <!-- Family members checkboxes -->
+    <div id="familyMembersContainer" class="checkbox-group">
+        <!-- Checkboxes will appear here dynamically when a family is selected -->
+    </div>
 
-        <!-- Family members checkboxes -->
-        <div id="familyMembersContainer" class="checkbox-group">
-            <!-- Checkboxes will appear here dynamically when a family is selected -->
-        </div>
-    </main>
+    <button id="submitBtn">Submit RSVP</button>
+</main>
 
-    <script>
-        // Replace with the URL of your deployed Google Apps Script Web App
-        const scriptUrl = 'https://script.google.com/macros/s/YOUR_DEPLOYED_URL/exec'; 
+<script src="fade_script.js"></script>
 
-        // Fetch family data from the Google Apps Script web app
-        fetch(scriptUrl)
-            .then(response => response.json())
-            .then(families => {
-                window.familiesData = families;  // Store the family data globally
-            })
-            .catch(error => {
-                console.error('Error fetching family data:', error);
-            });
-
-        // Event listener for the search input field
-        document.getElementById('search').addEventListener('input', function(event) {
-            const searchTerm = event.target.value.toLowerCase();  // Get the typed input, case insensitive
-            const familyList = document.getElementById('familyList');
-            familyList.innerHTML = ''; // Clear existing family list
-
-            // Filter families based on the search term
-            const filteredFamilies = window.familiesData.filter(family => {
-                return family.familyName.toLowerCase().includes(searchTerm);
-            });
-
-            // If families are found, display them
-            if (filteredFamilies.length > 0) {
-                filteredFamilies.forEach(family => {
-                    const familyDiv = document.createElement('div');
-                    familyDiv.textContent = family.familyName;
-                    familyDiv.classList.add('family-name');
-                    familyDiv.addEventListener('click', () => displayFamilyMembers(family));
-                    familyList.appendChild(familyDiv);
-                });
-            } else {
-                const noMatchDiv = document.createElement('div');
-                noMatchDiv.textContent = 'No families found';
-                familyList.appendChild(noMatchDiv);
-            }
+<script>
+    // Fetch family names from Google Apps Script or API
+    fetch('https://script.google.com/macros/s/AKfycbxUIs2uyHddcp5k7ft1CnAdSU9RyfjAcH-4diw_NJBjLhBD2gQKcEE4kE3LNZh6DOQgcg/exec',{
+	method: 'GET'})  // Replace with your actual Google Apps Script URL
+        .then(response => response.json())
+        .then(families => {
+            // Store the families in a global variable for later use
+            window.familiesData = families;
+        })
+        .catch(error => {
+            console.error('Error fetching family data:', error);
         });
 
-        // Function to display checkboxes for family members
-        function displayFamilyMembers(family) {
-            const familyMembersContainer = document.getElementById('familyMembersContainer');
-            familyMembersContainer.innerHTML = ''; // Clear any existing checkboxes
+    // Event listener for the search input field
+    document.getElementById('search').addEventListener('input', function(event) {
+        const searchTerm = event.target.value.toLowerCase();  // Get the typed input, case insensitive
+        const familyDropdown = document.getElementById('familyDropdown');
+        familyDropdown.innerHTML = '';  // Clear existing options
 
-            family.members.forEach(member => {
+        // Filter families based on the search term
+        const filteredFamilies = window.familiesData.filter(family => {
+            return family.members.some(name => name.toLowerCase().includes(searchTerm));
+        });
+
+        // Populate the dropdown with filtered families
+        filteredFamilies.forEach(family => {
+            const option = document.createElement('option');
+            option.value = family.familyId;  // Use familyId or the full family name as value
+            option.textContent = family.familyName;  // Display the family name
+            familyDropdown.appendChild(option);
+        });
+
+        // If no match is found, show a message in the dropdown
+        if (filteredFamilies.length === 0 && searchTerm) {
+            const option = document.createElement('option');
+            option.textContent = 'No families found';
+            familyDropdown.appendChild(option);
+        }
+    });
+
+    // Event listener for when a family is selected from the dropdown
+    document.getElementById('familyDropdown').addEventListener('change', function(event) {
+        const familyId = event.target.value;
+        const selectedFamily = window.familiesData.find(family => family.familyId === familyId);
+
+        // Clear previous checkboxes
+        const familyMembersContainer = document.getElementById('familyMembersContainer');
+        familyMembersContainer.innerHTML = '';  // Clear existing checkboxes
+
+        // If a family is selected, generate checkboxes for the family members
+        if (selectedFamily) {
+            selectedFamily.members.forEach(member => {
                 const checkboxContainer = document.createElement('div');
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
-                checkbox.id = member;
+                checkbox.id = member;  // Use the member's name as the checkbox ID
                 checkbox.value = member;
 
                 const label = document.createElement('label');
@@ -151,6 +134,44 @@
                 familyMembersContainer.appendChild(checkboxContainer);
             });
         }
-    </script>
+    });
+
+    // Event listener for the submit button
+    document.getElementById('submitBtn').addEventListener('click', function() {
+        const selectedMembers = [];
+        const checkboxes = document.querySelectorAll('#familyMembersContainer input[type="checkbox"]:checked');
+        
+        checkboxes.forEach(checkbox => {
+            selectedMembers.push(checkbox.value);  // Collect selected family members
+        });
+
+        if (selectedMembers.length > 0) {
+            // Prepare the data to send (example: you can add other form data)
+            const formData = {
+                familyMembers: selectedMembers,
+                // Add other fields like name, email, etc. here
+            };
+
+            // Send data to the Google Sheet or any backend of your choice (e.g., using Google Apps Script)
+            fetch('https://script.google.com/macros/s/AKfycbzK46TFrZrVl3K_mG-9qjmRiZJN0uVuY2zv4QbU3vcD/dev', {  // Replace with your actual URL for Apps Script
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('RSVP Submitted Successfully!');
+            })
+            .catch(error => {
+                console.error('Error submitting RSVP:', error);
+            });
+        } else {
+            alert('Please select at least one family member.');
+        }
+    });
+</script>
+
 </body>
 </html>
