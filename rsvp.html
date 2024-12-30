@@ -1,110 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wedding RSVP</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    #searchResults { margin-top: 20px; }
-    .family { margin-bottom: 10px; }
-    .member { margin-left: 20px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>RSVP</title>
+    <style>
+        h1 {
+            font-size: 4em;
+        }
+        p {
+            font-size: 1.5em;
+        }
+        #familyMembers {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .search {
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
 
-<h1>RSVP for Our Wedding</h1>
-<p>Search for your name to RSVP:</p>
-<input type="text" id="searchInput" placeholder="Enter your name">
-<button onclick="searchFamily()">Search</button>
+<header>
+    <a href="home.html">Home</a>
+    <a href="rsvp.html">RSVP</a>
+    <a href="registry.html">Registry</a>
+    <a href="funds.html">Honeymoon Fund</a>
+    <a href="faq.html">FAQs</a>
+</header>
 
-<div id="searchResults"></div>
+<main>
+    <h1>RSVP</h1>
+    <p class="main">Please fill out the form to RSVP to the wedding! The invitation included the names
+        of those invited and whether or not plus ones were being accommodated! Thank you
+        for understanding this is going to be a small wedding and not all can be invited!</p>
+    <p class="deadline">The deadline to RSVP is April 20th.</p>
+
+    <label for="search">Search for a family:</label>
+    <input type="text" id="search" placeholder="Start typing a name...">
+    
+    <!-- Family dropdown -->
+    <label for="familyDropdown">Select your family:</label>
+    <select id="familyDropdown">
+        <!-- Family names will be populated here dynamically -->
+    </select>
+    
+    <!-- Family members checkboxes -->
+    <div id="familyMembersContainer" class="checkbox-group">
+        <!-- Checkboxes will appear here dynamically when a family is selected -->
+    </div>
+
+    <button id="submitBtn">Submit RSVP</button>
+</main>
+
+<script src="fade_script.js"></script>
 
 <script>
-  // Replace this URL with your Google Apps Script Web App URL
-  const scriptURL = "https://script.google.com/macros/s/AKfycby78ilE9ZFFuXMVIDx_lTTQPh3J2jFiJSVT8I90LoNcSoSLVFTb3arSgjI61ixGBsIBSA/exec"; // <-- Your Web App URL here
+     fetch('https://script.google.com/macros/s/AKfycby0jXnBXhsbEyH91le8ihSq4M4T5kBnTvYw4FKDn2_VhChdz8noFE61dJoFeORZ2-acWw/exec') // Replace with your actual URL
+        .then(response => response.json())
+        .then(families => {
+            const familyMembersDiv = document.getElementById('familyMembers');
+            
+            families.forEach(family => {
+                const familyLabel = document.createElement('p');
+                familyLabel.textContent = `Family: ${family.familyId}`;
+                familyMembersDiv.appendChild(familyLabel);
 
-  function searchFamily() {
-    const searchInput = document.getElementById('searchInput').value;
+                family.members.forEach(member => {
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.name = 'attendees';
+                    checkbox.value = member;
+                    checkbox.id = member;
 
-    // Send a GET request to your Google Apps Script Web App with the search input
-    fetch(`${scriptURL}?name=${encodeURIComponent(searchInput)}`)
-      .then(response => response.json())
-      .then(data => displayResults(data))
-      .catch(error => console.error("Error fetching family data:", error));
-  }
+                    const label = document.createElement('label');
+                    label.htmlFor = member;
+                    label.textContent = member;
 
-  function displayResults(familyMembers) {
-    const resultsDiv = document.getElementById('searchResults');
-    resultsDiv.innerHTML = ''; // Clear previous results
+                    familyMembersDiv.appendChild(checkbox);
+                    familyMembersDiv.appendChild(label);
+                    familyMembersDiv.appendChild(document.createElement('br'));
+                });
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching families:', error);
+        });
 
-    if (familyMembers.length === 0) {
-      resultsDiv.innerHTML = 'No family members found.';
-      return;
-    }
+        // Handle the form submission
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
 
-    const familyDiv = document.createElement('div');
-    familyDiv.classList.add('family');
+            const formData = new FormData(this);
+            const formObject = {};
+            formData.forEach((value, key) => {
+                if (key === 'attendees') {
+                    // Collect all selected attendees
+                    formObject[key] = formObject[key] || [];
+                    formObject[key].push(value);
+                } else {
+                    formObject[key] = value;
+                }
+            });
 
-    familyMembers.forEach(member => {
-      const memberDiv = document.createElement('div');
-      memberDiv.classList.add('member');
+            const googleScriptUrl = 'https://script.google.com/macros/s/AKfycby0jXnBXhsbEyH91le8ihSq4M4T5kBnTvYw4FKDn2_VhChdz8noFE61dJoFeORZ2-acWw/exec'; // Replace with your deployed URL
 
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.value = member;
-
-      const label = document.createElement('label');
-      label.textContent = member;
-
-      memberDiv.appendChild(checkbox);
-      memberDiv.appendChild(label);
-      familyDiv.appendChild(memberDiv);
-    });
-
-    const rsvpButton = document.createElement('button');
-    rsvpButton.textContent = 'RSVP';
-    rsvpButton.onclick = () => submitRSVP(familyMembers[0], getSelectedMembers(familyDiv)); // Use first member name as family name
-    familyDiv.appendChild(rsvpButton);
-
-    resultsDiv.appendChild(familyDiv);
-  }
-
-  function getSelectedMembers(familyDiv) {
-    const checkboxes = familyDiv.querySelectorAll('input[type="checkbox"]');
-    const selectedMembers = [];
-    checkboxes.forEach(checkbox => {
-      if (checkbox.checked) {
-        selectedMembers.push(checkbox.value);
-      }
-    });
-    return selectedMembers;
-  }
-
-  function submitRSVP(familyName, members) {
-    // Prepare the data to send to the Google Apps Script Web App for RSVP submission
-    const rsvpData = {
-      familyName: familyName,
-      members: members
-    };
-
-    // Send a POST request to the Google Apps Script Web App to record the RSVP
-    fetch(scriptURL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(rsvpData)
-    })
-    .then(response => response.json())
-    .then(data => {
-      alert('Your RSVP has been submitted.');
-    })
-    .catch(error => {
-      console.error("Error submitting RSVP:", error);
-      alert('An error occurred. Please try again.');
-    });
-  }
+            // Send the form data to Google Apps Script
+            fetch(googleScriptUrl, {
+                method: 'POST',
+                body: new URLSearchParams(formObject)
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data); // Show response from the Google Apps Script
+                document.getElementById('rsvpForm').reset(); // Reset the form
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error submitting your RSVP.');
+            });
+        });
 </script>
 
 </body>
