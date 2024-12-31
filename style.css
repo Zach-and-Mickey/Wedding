@@ -1,6 +1,6 @@
 body {
    background-color: black;
-
+   display: flex;
    font-family: 'Great Vibes', cursive;
    margin: 0;
    padding: 0;
@@ -10,12 +10,14 @@ body {
    transition: opacity .75s ease-in-out;
 }
 header {
+
    background-image: linear-gradient(to right, rgba(200,120,130,.5),rgba(254,130,140,1),rgba(200,120,130,.5));
    color: black;
    padding: 25px;
    text-align: center;
    font-size: 1.5em;
    height: 50px;
+   width: 100%;
 }
 header a {
    color: black;
@@ -23,12 +25,27 @@ header a {
    padding: 10px;
    margin: 10px;
    font-size: 1.5em;
+   width: 100%;
 }
+.container {
+   display: flex;                /* Enable Flexbox */
+   justify-content: center;       /* Center items horizontally */
+   align-items: center;           /* Center items vertically */
+   height: auto;                 /* Take full viewport height */
+   flex-direction: column;        /* Stack the content vertically */
+   background-color: black;      /* Set background color */
+   color: rgb(254,130,140);       /* Text color */
+   font-family: 'Great Vibes', cursive;  /* Font */
+   text-align: center;            /* Center text inside */
+   margin: 0;
+   padding: 0;
 header a:hover {
     background-color: rgb(157,193,131);
     color: rgb(254,130,140);
     border-radius: 25px;
     text-shadow: 3px 3px 3px rgb(0,0,0);
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover transition */
+}
 }
 body.fade-out {
     opacity: 0;
