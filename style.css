@@ -1,0 +1,67 @@
+body {
+   background-color: black;
+   display: flex;
+   font-family: 'Great Vibes', cursive;
+   margin: 0;
+   padding: 0;
+   color: rgb(254,130,140);
+   text-align: center;
+   opacity:1;
+   transition: opacity .75s ease-in-out;
+}
+header {
+
+   background-image: linear-gradient(to right, rgba(200,120,130,.5),rgba(254,130,140,1),rgba(200,120,130,.5));
+   color: black;
+   padding: 25px;
+   text-align: center;
+   font-size: 1.5em;
+   height: 50px;
+   width: 100%;
+   position: sticky;
+   top:0;
+   z-index: 10;
+}
+header a {
+   color: black;
+   text-decoration: none;
+   padding: 10px;
+   margin: 10px;
+   font-size: 1.5em;
+   width: 100%;
+}
+.container {
+   display: flex;                /* Enable Flexbox */
+   justify-content: center;       /* Center items horizontally */
+   align-items: center;           /* Center items vertically */
+   min-height: 100vh;                 /* Take full viewport height */
+   flex-direction: column;        /* Stack the content vertically */
+   background-color: black;      /* Set background color */
+   color: rgb(254,130,140);       /* Text color */
+   font-family: 'Great Vibes', cursive;  /* Font */
+   text-align: center;            /* Center text inside */
+   margin: 0;
+   padding: 0;
+}
+header a:hover {
+    background-color: rgb(157,193,131);
+    color: rgb(254,130,140);
+    border-radius: 25px;
+    text-shadow: 3px 3px 3px rgb(0,0,0);
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover transition */
+}
+body.fade-out {
+    opacity: 0;
+}
+body.fade-in {
+    opacity: 1;
+}
+h1 {
+    text-decoration: underline;
+    font-size: 2.5 em;
+}
+p {
+color: rgb(157,193,131);
+padding: 5%;
+font-size: 2 em;
+}

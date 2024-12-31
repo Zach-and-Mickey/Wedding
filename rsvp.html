@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>RSVP</title>
+    <style>
+        h1 {
+            font-size: 3em;
+        }
+        p {
+            font-size: 1.5em;
+	    margin: 5%;
+	    padding: 2%;
+        }
+        #familyMembers {
+            margin: 5% 0;
+        }
+        button {
+            padding: 2%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .search {
+            padding: 5%;
+        }
+
+        /* Style for autocomplete suggestions */
+        .autocomplete-suggestions {
+
+            border: 1px solid white;
+            max-height: 10%;
+            overflow-y: auto;
+            background-color: black;
+            z-index: 10;
+            width: 50%;
+            margin:50px
+        }
+
+        .autocomplete-suggestion {
+            padding: 2%;
+            cursor: pointer;
+        }
+
+        .autocomplete-suggestion:hover {
+            background-color: gray;
+        }
+	button{
+	background-color: blue;
+	margin: 6%;
+	}
+    </style>
+</head>
+<body>
+
+<div class="container">
+<header>
+    <a href="home.html">Home</a>
+    <a href="rsvp.html">RSVP</a>
+    <a href="registry.html">Registry</a>
+    <a href="funds.html">Honeymoon Fund</a>
+    <a href="faq.html">FAQs</a>
+</header>
+
+    <h1>RSVP</h1>
+    <p class="main">Please fill out the form to RSVP to the wedding! The invitation included the names
+        of those invited and whether or not plus ones were being accommodated! Thank you
+        for understanding this is going to be a small wedding and not all can be invited!</p>
+    <p class="deadline">The deadline to RSVP is April 20th.</p>
+
+    <label for="search">Search for a family:</label>
+    <input type="text" id="search" placeholder="Start typing a name..." oninput="filterFamilies()">
+    
+      <!-- Autocomplete suggestions container -->
+    <div id="autocompleteSuggestions" class="autocomplete-suggestions"></div>
+    
+    <!-- Family members checkboxes -->
+    <div id="familyMembersContainer" class="checkbox-group">
+        <!-- Checkboxes will appear here dynamically when a family is selected -->
+    </div>
+
+    <button id="submitBtn">Submit RSVP</button>
+</div>
+
+<script src="fade_script.js"></script>
+
+<script>
+    let familiesData = [];
+
+    // Fetch family data from Google Apps Script
+ const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyOnvtJ4aFruqH5EV-NIylJxviWWLaxAY_ks2SkBI2PM7vZW09oksy1AuTXSznyOd7T6A/exec'; 
+    fetch(googleScriptUrl)
+        .then(response => response.json())
+        .then(families => {
+            familiesData = families;
+            
+        })
+        .catch(error => {
+            console.error('Error fetching families:', error);
+        });
+
+     // Function to filter families based on the search input and display autocomplete
+    function filterFamilies() {
+        const searchValue = document.getElementById('search').value.toLowerCase();
+        const autocompleteContainer = document.getElementById('autocompleteSuggestions');
+        autocompleteContainer.innerHTML = ''; // Clear previous suggestions
+
+        if (searchValue === '') {
+            return; // Exit early if search value is empty
+        }
+
+        // Filter families and their members based on search input
+        const filteredFamilies = familiesData.filter(family => 
+            family.members.some(member => member.toLowerCase().includes(searchValue))
+        );
+
+        // If no matching results, return early
+        if (filteredFamilies.length === 0) {
+            return;
+        }
+
+        // Populate the autocomplete suggestions
+        filteredFamilies.forEach(family => {
+            family.members.forEach(member => {
+                if (member.toLowerCase().includes(searchValue)) {
+                    const suggestionItem = document.createElement('div');
+                    suggestionItem.classList.add('autocomplete-suggestion');
+                    suggestionItem.textContent = member;
+
+                    // Add an event listener to handle selection
+                    suggestionItem.addEventListener('click', function() {
+                        selectFamilyMember(member);
+                    });
+
+                    autocompleteContainer.appendChild(suggestionItem);
+                }
+            });
+        });
+    }
+
+    // Function to handle the selection of an autocomplete suggestion
+    function selectFamilyMember(member) {
+        const searchInput = document.getElementById('search');
+        searchInput.value = member;  // Set the input field to the selected member
+        document.getElementById('autocompleteSuggestions').innerHTML = '';  // Clear suggestions
+
+        // Filter and show the family members for the selected member
+        showFamilyMembers(member);
+    }
+
+    // Function to display family members based on the selected family member
+    function showFamilyMembers(selectedMember) {
+        const familyMembersContainer = document.getElementById('familyMembersContainer');
+        familyMembersContainer.innerHTML = '';  // Clear previous checkboxes
+
+        // Find the family this member belongs to
+        const selectedFamily = familiesData.find(family => 
+            family.members.includes(selectedMember)
+        );
+
+        if (selectedFamily) {
+            // Create checkboxes for the family members
+            selectedFamily.members.forEach(member => {
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = 'attendees';
+                checkbox.value = member;
+                checkbox.id = member;
+
+                const label = document.createElement('label');
+                label.htmlFor = member;
+                label.textContent = member;
+
+                familyMembersContainer.appendChild(checkbox);
+                familyMembersContainer.appendChild(label);
+                familyMembersContainer.appendChild(document.createElement('br'));
+            });
+        }
+    }
+    // Handle the form submission
+    document.getElementById('submitBtn').addEventListener('click', function(e) {
+        e.preventDefault();  // Prevent default button click behavior
+
+        const formData = new FormData();
+        const selectedMembers = Array.from(document.querySelectorAll('input[name="attendees"]:checked'))
+            .map(checkbox => checkbox.value);
+
+        if (selectedMembers.length === 0) {
+            alert("Please select at least one attendee.");
+            return;
+        }
+
+        formData.append('attendees', selectedMembers);
+        
+        // Sending form data to Google Apps Script
+       
+
+        fetch(googleScriptUrl, {
+            method: 'POST',
+            body: new URLSearchParams(formData)
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data); // Show response from the Google Apps Script
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error submitting your RSVP.');
+        });
+    });
+</script>
+
+</body>
+</html>
