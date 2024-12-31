@@ -6,46 +6,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>RSVP</title>
+    <script src="fade_script.js"></script>
     <style>
-        h1 {
-            font-size: 3em;
-        }
-        p {
-            font-size: 1.5em;
-	    margin: 5%;
-	    padding: 2%;
-        }
         #familyMembers {
             margin: 5% 0;
         }
         button {
-            padding: 2%;
-
-            background-color: #4CAF50;
+            padding: .5%;
+            background-color: pink;
             color: white;
-            border: none;
+            border: .25em solid white;
             cursor: pointer;
+	    margin: 2%;
+	    border-radius: 25%;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: red;
         }
-        .search {
-
-            padding: 5%;
-
+	label {
+	font-size: 1.5 em;
+	}
+        #search {
+            padding: 1%;
+	    font-size: 1.5 em;
+	    background-color: seagreen;
+	    color: white;
         }
+	label {
+	font-size: 2em;
+	}
 
         /* Style for autocomplete suggestions */
         .autocomplete-suggestions {
-
+	    
             border: 1px solid white;
-            max-height: 10%;
+            min-height: 10%;
             overflow-y: auto;
             background-color: black;
-
             z-index: 10;
             width: 50%;
-            margin:50px
+	    margin: 2% auto;
         }
 
         .autocomplete-suggestion {
@@ -56,15 +56,14 @@
         .autocomplete-suggestion:hover {
             background-color: gray;
         }
-	button{
-	background-color: blue;
-	margin: 6%;
+	.checkbox-group {
+	    border: 1px;
+	    padding: 2%;
 	}
     </style>
 </head>
 <body>
 
-<div class="container">
 <header>
     <a href="home.html">Home</a>
     <a href="rsvp.html">RSVP</a>
@@ -73,6 +72,7 @@
     <a href="faq.html">FAQs</a>
 </header>
 
+<div class="container">
     <h1>RSVP</h1>
     <p class="main">Please fill out the form to RSVP to the wedding! The invitation included the names
         of those invited and whether or not plus ones were being accommodated! Thank you
@@ -90,11 +90,8 @@
         <!-- Checkboxes will appear here dynamically when a family is selected -->
     </div>
 
-    <button id="submitBtn">Submit RSVP</button>
+    <button id="submitBtn">RSVP</button>
 </div>
-
-<script src="fade_script.js"></script>
-
 <script>
     let familiesData = [];
 
@@ -220,6 +217,5 @@
         });
     });
 </script>
-
 </body>
 </html>
