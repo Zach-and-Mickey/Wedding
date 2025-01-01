@@ -13,25 +13,33 @@
         }
         button {
             padding: .5%;
-            background-color: pink;
-            color: white;
-            border: .25em solid white;
+            background-color: white;
+	    font-size: 1em;
+	    
+            color: black;
+            border: 2px solid white;
             cursor: pointer;
 	    margin: 2%;
 	    border-radius: 25%;
         }
         button:hover {
-            background-color: red;
+            background-color: rgb(254,130,140);
         }
 	label {
 	font-size: 1.5 em;
 	}
         #search {
-            padding: 1%;
-	    font-size: 1.5 em;
-	    background-color: seagreen;
+            padding: .5%;
+	    font-size: 1.75em;
+	    background-color: rgb(80,200,120);
 	    color: white;
+	    border-radius: 20px;
+	    border: 2px solid white;
+	    text-align: center;
         }
+	input::placeholder {
+	    color:black
+	}
 	label {
 	font-size: 2em;
 	}
@@ -46,6 +54,7 @@
             z-index: 10;
             width: 50%;
 	    margin: 2% auto;
+	    font-size: 2em;
         }
 
         .autocomplete-suggestion {
@@ -60,6 +69,12 @@
 	    border: 1px;
 	    padding: 2%;
 	}
+	input[type="checkbox"] {
+	    transform: scale(1.5); /* Scales the checkbox to 1.5 times its normal size */
+	    margin-right: 10px;     /* Adds some space between checkbox and label */
+	    accent-color: rgb(80,200,120);
+
+}
     </style>
 </head>
 <body>
@@ -74,10 +89,10 @@
 
 <div class="container">
     <h1>RSVP</h1>
-    <p class="main">Please fill out the form to RSVP to the wedding! The invitation included the names
-        of those invited and whether or not plus ones were being accommodated! Thank you
-        for understanding this is going to be a small wedding and not all can be invited!</p>
-    <p class="deadline">The deadline to RSVP is April 20th.</p>
+    <p class="main">Please search below for any name included on the wedding invitation. This will bring up your entire party. Please select only those who will be attending, including plus ones. The wedding invitation included all the names of your party and whether a plus one was being accommodated. Click the RSVP button, and you're done! Thank you for understanding; this will be a small wedding, and our guest list was limited. If you are having trouble, please email us at MiKandZSledge@gmail.com, and we will assist you! We appreciate everyone who will be joining us that day! Be sure to check out the FaQs section for any questions you may have! 
+
+A text confirmation will be sent a few days after your RSVP is submitted to confirm your party! </p>
+    <p class="deadline">The deadline to RSVP is April 20th. </p>
 
     <label for="search">Search for a family:</label>
     <input type="text" id="search" placeholder="Start typing a name..." oninput="filterFamilies()">
