@@ -21,6 +21,13 @@
 	    margin: 5%;
 	    margin-top: 0;
 	}
+	#paypal-container-button {
+	    text-align: center;
+	    justify-content: center;
+	}
+	input[type='number'] {
+	    text-align: center;
+	}
     </style>
 </head>
 <body>
@@ -34,12 +41,19 @@
     </header>
 <div id='container'>
 	<h1>Honeymoon Fund</h1>
-	<p>This money will be used for our honeymoon! As well as any last minute household needs we did not think about or items that were not purchased!</p>
-	<p>We greatly appreciate everything bought or any money being sent! Thank you for supporting us in this new chapter!</p>
+	<p>This money will be used for our honeymoon! As well as any last minute household needs we did not think about or items that were not purchased! We greatly appreciate everything bought or any money being sent! Thank you for supporting us in this new chapter of our lives!</p>
 	<p>You can select your preferred payment method below.</p>
 	<p class='above_p'>Any checks written can be made out to "Zachary Sledge" with the memo as "Wedding."</p>
 	<p class='parentheses'>(This allows for all checks to be cashed without a problem during the name change!)</p>
-	<p class='note'> Note: There will be a 3% processing charge on all credit card transactions.</p>	
+	<p class='note'> Note: There will be a 3% processing charge on all credit card transactions.</p>
+<div id="paypal-container-button"></div>	
 </div>
+<script src="https://www.paypal.com/sdk/js?client-id=BAA0ogZ9aWvdJl-eBoFKPMPS9HCrMPOgIRAsVBcjN5IT7fQJRKod5gM2vv34UHvyhKYpbSXIU8Rkshu_0o&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
+
+<script>
+  paypal.HostedButtons({
+    hostedButtonId: "WKZBTN5WE4VUQ",
+  }).render("#paypal-container-button")
+</script>
 </body>
 </html>
