@@ -59,6 +59,13 @@ header a:hover {
     text-shadow: 3px 3px 3px rgb(0,0,0);
     transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover transition */
 }
+header a.active {    
+    background-color: rgb(80,200,120);
+    color: rgb(254,130,140);
+    border-radius: 25px;
+    text-shadow: 3px 3px 3px rgb(0,0,0);
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover transition */
+}
 body.fade-out {
     opacity: 0;
 }

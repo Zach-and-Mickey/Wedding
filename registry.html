@@ -28,15 +28,14 @@
 <body>
 
     <header>
-        <a href='home.html'>Home</a>
-        <a href="rsvp.html">RSVP</a>
-        <a href="registry.html">Registry</a>
-        <a href="funds.html">Honeymoon Fund</a>
-        <a href="faq.html">FAQs</a>
+        <a href='index.html' class='link'>Home</a>
+        <a href="rsvp.html" class='link'>RSVP</a>
+        <a href="registry.html" class='link'>Registry</a>
+        <a href="funds.html" class='link'>Honeymoon Fund</a>
+        <a href="faq.html" class='link'>FAQs</a>
     </header>
 <div id='container'>
     <main>
-        <h1>Registries</h1>
         <p>While gifts are not required, we are thankful for anything that can be given to help us in
  	   this transition together! These are our wants and needs for our future household. We appreciate anything
            you can purchase for us! Please no substitutions or added items as we do not have room to store added items or decor.
@@ -50,5 +49,16 @@
 	</div>
     </main>
 </div>
+  <script>
+    const currentPage = window.location.pathname;
+    const navLinks = document.querySelectorAll('.link');
+    console.log(currentPage);
+    console.log(navLinks);
+    navLinks.forEach(link => {
+      if (link.href.includes(currentPage)) {
+        link.classList.add('active');
+      }
+    });
+  </script>
 </body>
 </html>

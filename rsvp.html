@@ -80,15 +80,14 @@
 <body>
 
 <header>
-    <a href="home.html">Home</a>
-    <a href="rsvp.html">RSVP</a>
-    <a href="registry.html">Registry</a>
-    <a href="funds.html">Honeymoon Fund</a>
-    <a href="faq.html">FAQs</a>
+    <a href="index.html" class='link'>Home</a>
+    <a href="rsvp.html" class='link'>RSVP</a>
+    <a href="registry.html"class='link'>Registry</a>
+    <a href="funds.html" class='link'>Honeymoon Fund</a>
+    <a href="faq.html" class='link'>FAQs</a>
 </header>
 
 <div class="container">
-    <h1>RSVP</h1>
     <p class="main">Please search below for any name included on the wedding invitation. This will bring up your entire party. Please select only those who will be attending, including plus ones. The wedding invitation included all the names of your party and whether a plus one was being accommodated. Click the RSVP button, and you're done! Thank you for understanding; this will be a small wedding, and our guest list was limited. If you are having trouble, please email us at MiKandZSledge@gmail.com, and we will assist you! We appreciate everyone who will be joining us that day! Be sure to check out the FaQs section for any questions you may have! 
 
 A text confirmation will be sent a few days after your RSVP is submitted to confirm your party! </p>
@@ -111,7 +110,7 @@ A text confirmation will be sent a few days after your RSVP is submitted to conf
     let familiesData = [];
 
     // Fetch family data from Google Apps Script
- const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyOnvtJ4aFruqH5EV-NIylJxviWWLaxAY_ks2SkBI2PM7vZW09oksy1AuTXSznyOd7T6A/exec'; 
+ const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbzP3R9cLA7QkCx6T_XSPdG88o6vGplp3HceCJlHgC7i00AXScyTr7r_iOKtaDXimP5AHg/exec'; 
     fetch(googleScriptUrl)
         .then(response => response.json())
         .then(families => {
@@ -213,8 +212,10 @@ A text confirmation will be sent a few days after your RSVP is submitted to conf
             return;
         }
 
-        formData.append('attendees', selectedMembers);
-        
+	selectedMembers.forEach(member => {
+            formData.append('attendees', member);
+	})
+
         // Sending form data to Google Apps Script
        
 
@@ -222,6 +223,7 @@ A text confirmation will be sent a few days after your RSVP is submitted to conf
             method: 'POST',
             body: new URLSearchParams(formData)
         })
+
         .then(response => response.text())
         .then(data => {
             alert(data); // Show response from the Google Apps Script
@@ -232,5 +234,16 @@ A text confirmation will be sent a few days after your RSVP is submitted to conf
         });
     });
 </script>
+  <script>
+    const currentPage = window.location.pathname;
+    const navLinks = document.querySelectorAll('.link');
+    console.log(currentPage);
+    console.log(navLinks);
+    navLinks.forEach(link => {
+      if (link.href.includes(currentPage)) {
+        link.classList.add('active');
+      }
+    });
+  </script>
 </body>
 </html>

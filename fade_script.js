@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('load', function() {
     // Apply the fade-in class immediately after the page is loaded
  // A small delay to allow the class to be added before any content is shown
 document.body.classList.add('fade-in')

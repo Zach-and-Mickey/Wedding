@@ -33,14 +33,13 @@
 <body>
 
     <header>
-        <a href="home.html">Home</a>
-        <a href="rsvp.html">RSVP</a>
-        <a href="registry.html">Registry</a>
-        <a href="funds.html">Honeymoon Fund</a>
-        <a href="faq.html">FAQs</a>
+        <a href="index.html" class="link">Home</a>
+        <a href="rsvp.html" class='link'>RSVP</a>
+        <a href="registry.html" class='link'>Registry</a>
+        <a href="funds.html" class='link'>Honeymoon Fund</a>
+        <a href="faq.html" class='link'>FAQs</a>
     </header>
 <div id='container'>
-	<h1>Honeymoon Fund</h1>
 	<p>This money will be used for our honeymoon! As well as any last minute household needs we did not think about or items that were not purchased! We greatly appreciate everything bought or any money being sent! Thank you for supporting us in this new chapter of our lives!</p>
 	<p>You can select your preferred payment method below.</p>
 	<p class='above_p'>Any checks written can be made out to "Zachary Sledge" with the memo as "Wedding."</p>
@@ -55,5 +54,16 @@
     hostedButtonId: "WKZBTN5WE4VUQ",
   }).render("#paypal-container-button")
 </script>
+  <script>
+    const currentPage = window.location.pathname;
+    const navLinks = document.querySelectorAll('.link');
+    console.log(currentPage);
+    console.log(navLinks);
+    navLinks.forEach(link => {
+      if (link.href.includes(currentPage)) {
+        link.classList.add('active');
+      }
+    });
+  </script>
 </body>
 </html>

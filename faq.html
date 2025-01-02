@@ -30,17 +30,16 @@
 <body>
 
     <header>
-        <a href="home.html">Home</a>
-        <a href="rsvp.html">RSVP</a>
-        <a href="registry.html">Registry</a>
-        <a href="funds.html">Honeymoon Fund</a>
-        <a href="faq.html">FAQs</a>
+        <a href="index.html" class="link">Home</a>
+        <a href="rsvp.html" class="link">RSVP</a>
+        <a href="registry.html" class="link">Registry</a>
+        <a href="funds.html" class="link">Honeymoon Fund</a>
+        <a href="faq.html" class="link">FAQs</a>
     </header>
 <div id='container'>
-	<h1>Details and FAQs</h1>
 	<p class="intro">Here you can find answers to some of the most commonly asked questions.
 		If you have a question that is not answered here, you can email your question to
-		sledge_wedding@gmail.com.</p>
+		mikandzsledge@gmail.com.</p>
 	<h2>Venue Information</h2>
 	<p class='venue'>The venue is XXX. <br> The address is XXX. <br> There is a short walk to the ceremony and reception
   			 area, but golf carts will be available to guests!</p>
@@ -80,5 +79,16 @@
 			   We also will be having several wedding showers that many guests will be invited to!<br><br> There will also be a video recording of the ceremony
 			   and moments from the reception that will be shared when available to us!</p>
 </div>
+  <script>
+    const currentPage = window.location.pathname;
+    const navLinks = document.querySelectorAll('.link');
+    console.log(currentPage);
+    console.log(navLinks);
+    navLinks.forEach(link => {
+      if (link.href.includes(currentPage)) {
+        link.classList.add('active');
+      }
+    });
+  </script>
 </body>
 </html>
