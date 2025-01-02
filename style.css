@@ -82,13 +82,17 @@ margin: 4%;
 font-size: 1.5em;
 }
 
-@media screen and (max-width: 768px) {
-    /* Smaller screen adjustments */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    /* Adjusting header styles for medium screens */
     header {
         font-size: 1.2em;
         padding: 1% 5%;
         height: auto;
-        flex-direction: column; /* Stack elements vertically for smaller screens */
+        flex-direction: column; /* Stack header links vertically */
+        position: relative;     /* Default position */
+        top: 0;
+        left: 0;
+        width: 100%;
     }
 
     header a {
@@ -97,54 +101,48 @@ font-size: 1.5em;
         margin: 1%;
     }
 
-    /* Reduce font size for the body text */
     p {
         font-size: 1.2em;
         margin: 2%;
     }
 
     h1 {
-        font-size: 1.3em;  /* Reduce heading size */
+        font-size: 1.3em;
     }
 
     #container {
-        padding-top: 10%;  /* Adjust padding for smaller screens */
+        padding-top: 10%; /* Adjust padding for smaller screens */
     }
 }
 
+/* Media Query for Screens Smaller than 480px (Mobile Portrait Mode) */
 @media screen and (max-width: 480px) {
-    /* For very small screens (like mobile phones in portrait mode) */
+    /* Adjusting header styles for smaller screens */
     header {
-        font-size: 1em;    /* Further reduce font size */
-        padding: 1% 3%;     /* Even smaller padding */
+        font-size: 1em;
+        padding: 1% 3%;
+        flex-direction: column; /* Stack header links vertically */
+        height: auto;
+        position: relative;     /* Default position */
+        top: 0;
+        left: 0;
+        width: 100%;
     }
 
     header a {
-        font-size: 1rem;    /* Reduce font size for links */
-        padding: 0.5% 1.5%;  /* Even smaller padding for links */
+        font-size: 1rem;
+        padding: 0.5% 1.5%;
     }
 
     p {
-        font-size: 1.1em;   /* Reduce body text size */
+        font-size: 1.1em;
     }
 
     h1 {
-        font-size: 1.2em;   /* Adjust heading size */
+        font-size: 1.2em;
     }
 
     #container {
-        padding-top: 12%;   /* More space at the top */
-    }
-
-    /* Stack links vertically in the header for small screens */
-    header {
-        flex-direction: column;  /* Stack header links vertically */
-        height: auto;            /* Allow header to adjust height */
-	position: relative;
-	top:0;
-	left:0;
-	width:100%;
-	
-
+        padding-top: 12%; /* More space for small devices */
     }
 }
