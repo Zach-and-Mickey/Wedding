@@ -9,7 +9,7 @@
     <script src="fade_script.js"></script>
     <style>
 	body{
-	   background-image: url('background.png');
+	   background-image: url('website-background.png');
 	   background-size:100% 90%;
   	   background-position: center 100px;
 	   background-attachment: fixed;
@@ -30,8 +30,13 @@
 	    top: 40%;
 	    left: 18%;
 	    transform: translate(-50%,-50%);
-
-
+	}
+	@media only screen and (max-width: 768px) {
+	   body {
+	   background-image: url('phone-background.png');
+	   background-position: center;
+	   background-size: cover;
+	   }
 	}
     </style>
 </head>
@@ -49,8 +54,22 @@
 	<p id='countdown'></p>
     </div>
 
+    <!-- Hamburger Icon (Dropdown Button) -->
+    <div class='button-container'>
+    <button class="menu-btn" id="menuBtn">&#9776;</button>
+    </div>
 
+    <!-- Dropdown Menu -->
+    <div class="dropdown-menu" id="dropdownMenu">
+        <a href="index.html" class='link'>Home</a>
+        <a href="rsvp.html" class='link'>RSVP</a>
+        <a href="registry.html" class='link'>Registry</a>
+        <a href="funds.html" class='link'>Honeymoon Fund</a>
+        <a href="faq.html" class='link'>FAQs</a>
+    </div>
+<script src='dropdown.js'></script>
 <script src="countdown.js"></script>
+
   <script>
     const currentPage = window.location.pathname;
     const navLinks = document.querySelectorAll('.link');
@@ -59,8 +78,10 @@
     navLinks.forEach(link => {
       if (link.href.includes(currentPage)) {
         link.classList.add('active');
+      } else {
+	link.classList.remove('active');
       }
-    });
+    })
   </script>
 </body>
 </html>

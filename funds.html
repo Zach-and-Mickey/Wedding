@@ -24,6 +24,7 @@
 	#paypal-container-button {
 	    text-align: center;
 	    justify-content: center;
+	    align-items: center;
 	}
 	input[type='number'] {
 	    text-align: center;
@@ -39,6 +40,20 @@
         <a href="funds.html" class='link'>Honeymoon Fund</a>
         <a href="faq.html" class='link'>FAQs</a>
     </header>
+    <!-- Hamburger Icon (Dropdown Button) -->
+    <div class='button-container'>
+    <button class="menu-btn" id="menuBtn">&#9776;</button>
+    </div>
+
+    <!-- Dropdown Menu -->
+    <div class="dropdown-menu" id="dropdownMenu">
+        <a href="index.html" class='link'>Home</a>
+        <a href="rsvp.html" class='link'>RSVP</a>
+        <a href="registry.html" class='link'>Registry</a>
+        <a href="funds.html" class='link'>Honeymoon Fund</a>
+        <a href="faq.html" class='link'>FAQs</a>
+    </div>
+
 <div id='container'>
 	<p>This money will be used for our honeymoon! As well as any last minute household needs we did not think about or items that were not purchased! We greatly appreciate everything bought or any money being sent! Thank you for supporting us in this new chapter of our lives!</p>
 	<p>You can select your preferred payment method below.</p>
@@ -65,5 +80,6 @@
       }
     });
   </script>
+<script src='dropdown.js'></script>
 </body>
 </html>
