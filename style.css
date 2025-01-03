@@ -1,5 +1,6 @@
 /* green = rgb(80,200,120); */
 /* pink = rgb(254,130,140); */
+/* ivory = #FFFFF0; */
 @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Norican&family=Petit+Formal+Script&display=swap');
 body {
    background-color: black;
@@ -78,7 +79,7 @@ h1 {
     font-size: 1.5em;
 }
 p {
-color: white;
+color: #FFFFF0;
 margin: 4%;
 font-size: 1.5em;
 }
@@ -102,9 +103,12 @@ font-size: 1.5em;
             text-align: center;
 	    justify-content: center;
 	    align-items: center;
-	    text-shadow: 2px 2px 2px rgb(0,0,0);
+	    text-shadow: 2px 2px 1px black;
+	    font-size: 1em;
+	    font-weight: bold;
             z-index: 1000;
-	    border: 5px inset gray;
+	    border: 5px outset gray;
+	    box-shadow: 5px 5px 5px gray;
 
         }
 
@@ -122,6 +126,7 @@ font-size: 1.5em;
 	.button-container {
 	    display:none;
 	}
+
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
     header {
@@ -143,7 +148,7 @@ font-size: 1.5em;
 
     .menu-btn {
         display: block;  /* Show the menu button */
-        background-color: white;
+        background-color: #FFFFF0;
         color: rgb(80,200,120);
         font-size: 30px;
         padding: 1% 2%;
@@ -198,7 +203,7 @@ font-size: 1.5em;
 
     .menu-btn {
         display: block;  /* Show the menu button */
-        background-color: white;
+        background-color: #FFFFF0;
         color: rgb(80,200,120);
         font-size: 30px;
         padding: 1% 2%;

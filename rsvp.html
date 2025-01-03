@@ -8,10 +8,7 @@
     <title>RSVP</title>
     <script src="fade_script.js"></script>
     <style>
-        #familyMembers {
-            margin: 5% 0;
-        }
-        button {
+        #submitBtn {
             padding: .5%;
             background-color: white;
 	    font-size: 1em;
@@ -22,12 +19,9 @@
 	    margin: 2%;
 	    border-radius: 25%;
         }
-        button:hover {
+        #submitBtn:hover {
             background-color: rgb(254,130,140);
         }
-	label {
-	font-size: 1.5 em;
-	}
         #search {
             padding: .5%;
 	    font-size: 1.75em;
@@ -40,8 +34,8 @@
 	input::placeholder {
 	    color:black
 	}
-	label {
-	font-size: 2em;
+	label[for='search'] {
+	font-size: 1.75em;
 	}
 
         /* Style for autocomplete suggestions */
@@ -65,15 +59,39 @@
         .autocomplete-suggestion:hover {
             background-color: gray;
         }
-	.checkbox-group {
-	    border: 1px;
-	    padding: 2%;
-	}
-	input[type="checkbox"] {
-	    transform: scale(1.5); /* Scales the checkbox to 1.5 times its normal size */
-	    margin-right: 10px;     /* Adds some space between checkbox and label */
-	    accent-color: rgb(80,200,120);
+	.member-container {
+    display: flex;
+    align-items: center;  /* Align items vertically in the center */
+    justify-content: right;
+    margin-bottom: 15px;  /* Add spacing between family members */
+    font-size: 2em;  /* Adjust font size */
+}
 
+/* Member name style */
+.member-name {
+    margin-right: 10%;
+    white-space: nowrap;  /* Space between name and checkboxes */
+    flex-grow: 1;
+}
+
+/* Style for the Yes/No checkboxes */
+input[type="checkbox"] {
+    transform: scale(1.5);  /* Increase checkbox size */
+    margin-right: 2%;  /* Space between checkbox and label */
+    accent-color: rgb(80, 200, 120);
+}
+
+/* Label for Yes/No checkboxes */
+label {
+    font-size: 1em;
+    margin-right: 2%;  /* Space between labels */
+}
+
+/* Container for the family members */
+#familyMembersContainer {
+    display: flex;
+    flex-direction: column;  /* Stack family members vertically */
+    margin-top: 2.5%;
 }
     </style>
 </head>
@@ -142,6 +160,8 @@ A text confirmation will be sent a few days after your RSVP is submitted to conf
         autocompleteContainer.innerHTML = ''; // Clear previous suggestions
 
         if (searchValue === '') {
+		autocompleteContainer.innerHTML = '';
+ 		familyMembersContainer.innerHTML = '';
             return; // Exit early if search value is empty
         }
 
@@ -196,23 +216,49 @@ A text confirmation will be sent a few days after your RSVP is submitted to conf
 
         if (selectedFamily) {
             // Create checkboxes for the family members
-            selectedFamily.members.forEach(member => {
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.name = 'attendees';
-                checkbox.value = member;
-                checkbox.id = member;
+ 	        selectedFamily.members.forEach(member => {
+            const memberContainer = document.createElement('div');
+            memberContainer.classList.add('member-container');
+            
+            // Display the family member name
+            const memberName = document.createElement('span');
+            memberName.classList.add('member-name');
+            memberName.textContent = member;  // Display member name
 
-                const label = document.createElement('label');
-                label.htmlFor = member;
-                label.textContent = member;
+            // Create 'Yes' checkbox
+            const yesCheckbox = document.createElement('input');
+            yesCheckbox.type = 'checkbox';
+            yesCheckbox.name = 'attendees_yes';  // Different name to distinguish 'Yes' RSVPs
+            yesCheckbox.value = member;
+            yesCheckbox.id = member + '-yes';
 
-                familyMembersContainer.appendChild(checkbox);
-                familyMembersContainer.appendChild(label);
-                familyMembersContainer.appendChild(document.createElement('br'));
-            });
-        }
+            const yesLabel = document.createElement('label');
+            yesLabel.htmlFor = member + '-yes';
+            yesLabel.textContent = 'Yes';
+
+            // Create 'No' checkbox
+            const noCheckbox = document.createElement('input');
+            noCheckbox.type = 'checkbox';
+            noCheckbox.name = 'attendees_no';  // Different name to distinguish 'No' RSVPs
+            noCheckbox.value = member;
+            noCheckbox.id = member + '-no';
+
+            const noLabel = document.createElement('label');
+            noLabel.htmlFor = member + '-no';
+            noLabel.textContent = 'No';
+
+            // Append the name and checkboxes to the member container
+            memberContainer.appendChild(memberName);
+            memberContainer.appendChild(yesCheckbox);
+            memberContainer.appendChild(yesLabel);
+            memberContainer.appendChild(noCheckbox);
+            memberContainer.appendChild(noLabel);
+
+            // Append the member container to the family members container
+            familyMembersContainer.appendChild(memberContainer);
+        });
     }
+}
     // Handle the form submission
     document.getElementById('submitBtn').addEventListener('click', function(e) {
         e.preventDefault();  // Prevent default button click behavior
