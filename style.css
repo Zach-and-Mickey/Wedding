@@ -95,21 +95,19 @@ font-size: 1.5em;
             position: absolute;  /* Position it at the top of the screen */
             top: 10%;  /* Position it below the button */
             left: 50%;
-	    width: 50%;
-	    transform: translate(-50%);
-            background-color: #FFFFF0;
-            color: black;
-	    font-family: 'Great Vibes', cursive;
+			width: 50%;
+			transform: translate(-50%);
+            background-color: black;
+            color: rgb(254,130,140);
+			font-family: 'Great Vibes', serif;
             text-align: center;
-	    justify-content: center;
-	    align-items: center;
-	    text-shadow: 2px 2px 1px black;
-	    font-size: 1em;
-	    font-weight: bold;
+			justify-content: center;
+			align-items: center;
+			font-size: 1.25em;
+			font-weight: 500;
             z-index: 1000;
-	    border: 5px outset gray;
-	    box-shadow: 5px 5px 5px gray;
-
+			border: 5px outset rgb(254,130,140);
+			/*box-shadow: 5px 5px 5px rgb(254,130,140); */
         }
 
         .dropdown-menu a {
@@ -148,19 +146,19 @@ font-size: 1.5em;
 
     .menu-btn {
         display: block;  /* Show the menu button */
-        background-color: #FFFFF0;
-        color: rgb(80,200,120);
+        background-color: black;
+        color: #FFFFF0;
         font-size: 30px;
         padding: 1% 2%;
-	margin: 5px;
-        border: 2px ridge black;
+		margin: 5px;
+        border: 2px solid #FFFFF0;
         border-radius: 20%;
         cursor: pointer;
     }
 
     .menu-btn:hover {
-        border: 5px inset black;
-	margin:0;
+        border: 5px inset #FFFFF0;
+		margin:0;
     }
 
     .button-container {
