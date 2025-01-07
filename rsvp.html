@@ -145,6 +145,7 @@ label {
 
 A text confirmation will be sent a few days after your RSVP is submitted to confirm your party! </p>
     <p class="deadline">The deadline to RSVP is April 20th. </p>
+	<input type='email' id='email' placeholder="Your email address...">
 
     <label for="search">Search for a family:</label>
     <input type="text" id="search" placeholder="Start typing a name..." oninput="filterFamilies()">
@@ -163,7 +164,7 @@ A text confirmation will be sent a few days after your RSVP is submitted to conf
     let familiesData = [];
 
     // Fetch family data from Google Apps Script
- const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbzP3R9cLA7QkCx6T_XSPdG88o6vGplp3HceCJlHgC7i00AXScyTr7r_iOKtaDXimP5AHg/exec'; 
+ const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbz7r-z5CvzDmxpik3favT0FYb8O95gOi5AnV41nH1DxxWjpEr0G2AosxwU81KVMV6bFWg/exec'; 
     fetch(googleScriptUrl)
         .then(response => response.json())
         .then(families => {
@@ -280,40 +281,60 @@ A text confirmation will be sent a few days after your RSVP is submitted to conf
         });
     }
 }
-    // Handle the form submission
-    document.getElementById('submitBtn').addEventListener('click', function(e) {
-        e.preventDefault();  // Prevent default button click behavior
+// Handle the form submission
+document.getElementById('submitBtn').addEventListener('click', function(e) {
+    e.preventDefault();  // Prevent default button click behavior
 
-        const formData = new FormData();
-        const selectedMembers = Array.from(document.querySelectorAll('input[name="attendees"]:checked'))
-            .map(checkbox => checkbox.value);
+    const formData = new FormData();
+    const selectedYesMembers = Array.from(document.querySelectorAll('input[name="attendees_yes"]:checked'))
+        .map(checkbox => checkbox.value);
+    const selectedNoMembers = Array.from(document.querySelectorAll('input[name="attendees_no"]:checked'))
+        .map(checkbox => checkbox.value);
 
-        if (selectedMembers.length === 0) {
-            alert("Please select at least one attendee.");
-            return;
-        }
+    console.log(selectedYesMembers);
+    console.log(selectedNoMembers);
 
-	selectedMembers.forEach(member => {
-            formData.append('attendees', member);
-	})
+    // Check if no attendees were selected
+    if (selectedYesMembers.length === 0 && selectedNoMembers.length === 0) {
+        alert("Please select at least one attendee.");
+        return;
+    }
 
-        // Sending form data to Google Apps Script
-       
-
-        fetch(googleScriptUrl, {
-            method: 'POST',
-            body: new URLSearchParams(formData)
-        })
-
-        .then(response => response.text())
-        .then(data => {
-            alert(data); // Show response from the Google Apps Script
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('There was an error submitting your RSVP.');
-        });
+    // Append selected attendees to form data
+    selectedYesMembers.forEach(member => {
+        formData.append('attendees_yes', member);
     });
+
+    selectedNoMembers.forEach(member => {
+        formData.append('attendees_no', member);
+    });
+
+    // Fetch email value for submission
+    const email = document.getElementById('email').value;
+
+    // Submit the form data to the backend (or proxy server)
+    fetch(googleScriptUrl, {  // Replace with your production URL
+		redirect: 'follow',
+        method: 'POST',
+        body: JSON.stringify({
+            email: email,
+            attendees_yes: selectedYesMembers,
+            attendees_no: selectedNoMembers
+        }),
+        headers: {
+            'Content-Type': 'text/plain;charset=utf-8',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('RSVP submitted successfully');
+        console.log(data);  // Log the response data from the server
+    })
+    .catch(error => {
+        console.error('Error submitting RSVP:', error);
+        alert('Error submitting RSVP');
+    });
+});
 </script>
   <script>
     const currentPage = window.location.pathname;
