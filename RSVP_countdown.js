@@ -1,6 +1,6 @@
 
         // Set the date we're counting down to (Example: wedding date)
-        const targetDate = new Date("2025-05-20T17:00:00").getTime();
+        const targetDate = new Date("2025-04-15T23:59:59").getTime();
 
         // Update the countdown every 1 second
         const countdownInterval = setInterval(function() {
