@@ -11,10 +11,10 @@
             const RSVPtimeLeft = RSVPtargetDate - now;
 
             // Calculate days, hours, minutes, and seconds
-            const RSVPdays = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const RSVPhours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const RSVPminutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const RSVPseconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            const RSVPdays = Math.floor(RSVPtimeLeft / (1000 * 60 * 60 * 24));
+            const RSVPhours = Math.floor((RSVPtimeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const RSVPminutes = Math.floor((RSVPtimeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const RSVPseconds = Math.floor((RSVPtimeLeft % (1000 * 60)) / 1000);
 
             // Display the result
             document.getElementById("RSVPcountdown").innerHTML =
