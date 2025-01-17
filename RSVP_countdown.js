@@ -21,9 +21,9 @@
                 RSVPdays + "\n days\n " + RSVPhours + "\n hours\n" + RSVPminutes + "\n minutes\n";
 
             // If the countdown is finished, display a message
-            if (timeLeft <= 0) {
+            if (RSVPtimeLeft <= 0) {
                 clearInterval(countdownInterval);  // Stop the timer
-                document.getElementById("countdown").innerHTML = "EXPIRED";
+                document.getElementById("RSVPcountdown").innerHTML = "EXPIRED";
             }
         }, 1000);
 
