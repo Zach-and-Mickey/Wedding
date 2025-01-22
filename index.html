@@ -9,16 +9,8 @@
     <title>Homepage</title>
     <script src="fade_script.js"></script>
     <style>
-	body{
-	   background-image: url('website-background.png');
-	   background-size:100% 100%;
-	   height: 100vh;
-  	   background-position: center 100px;
-	   background-attachment: fixed;
-       background-repeat: no-repeat;
-	}
 	h1 {
-	    font-size: 2vw;
+	    font-size: 2.5vw;
 		font-family: "Leckerli One", serif;
 		font-weight: 100;
 		font-style: normal;
@@ -35,9 +27,10 @@
 	#bounding {
 	   display: flex;
 	   height: 90vh;
+	   margin-top: 5vh;
 	   flex-direction: column;
-	   justify-content: flex-end;
-	   align-items: bottom;
+	   justify-content: flex-start;
+	   align-items: center;
 	}
 	#countdown {
 	    justify-content: center;
@@ -46,10 +39,38 @@
 		font-size: 1.5vw;
 		margin: 1vh;
 	}
+	#name {
+	   display:flex;
+	   background-image: url('website-background.png');
+	   background-size: cover;
+	   width:100%;
+	   height: 20%;
+  	   background-position: center;
+       background-repeat: no-repeat;
+	   align-items: center;
+	   justify-content: center;
+	}
+	#us-pictures {
+		background-image: url('us-pictures.png');
+		width:95%;
+		height: 30vh;
+		background-size: cover;
+		background-position: center;		
+		}
 	@media only screen and (max-width: 768px) {
 	   h1 {
 	   font-size: 5vw;
 	}
+		#bounding {
+		margin-top: 12vh;
+		}
+		#name {
+		background-size: 200%;
+		}
+		#us-pictures {
+		width: 125%;
+		margin: 0;
+		}
 		#welcome {
 		font-size: 5vw;
 	}
@@ -70,6 +91,8 @@
     </header>
 
     <div id="bounding">
+			<div id='name'></div>
+			<div id='us-pictures'></div>
 	<h1>The Wedding Day</h1>
 	<p id='countdown'></p>
 	<p id='welcome'>Welcome to our wedding website! We are so glad you are a part of our special day!</p>
