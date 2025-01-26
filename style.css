@@ -121,6 +121,10 @@ font-size: 1.5em;
         .dropdown-menu a:hover {
             background-color: #444;
         }
+		
+		.dropdown-menu a.active {
+            background-color: #444;
+        }
 	.button-container {
 	    display:none;
 	}
