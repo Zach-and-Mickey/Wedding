@@ -23,7 +23,18 @@
 <div id='home' class='tab-content active'>
     <div id="bounding">
 			<div id='name'></div>
-			<div id='us-pictures'></div>
+   <div class="carousel-container">
+        <button class="left-arrow" id="leftArrow">←</button>
+
+        <div class="image-container" id="imageContainer">
+            <img src="IMG1.jpg" alt="Image 1" class="carousel-image" id="image1">
+            <img src="IMG2.jpg" alt="Image 2" class="carousel-image" id="image2">
+            <img src="IMG3.jpg" alt="Image 3" class="carousel-image" id="image3">
+        </div>
+
+        <button class="right-arrow" id="rightArrow">→</button>
+    </div>
+
 	<h1>Our Wedding Day</h1>
 	<p id='countdown'></p>
 	<p id='welcome'>Welcome to our wedding website! We are so glad you are a part of our special day!</p>
@@ -139,7 +150,7 @@ An email confirmation will be sent after your RSVP is submitted to confirm your 
     let familiesData = [];
 
     // Fetch family data from Google Apps Script
- const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbzYOZ20ckwdE_ZdJyQArQOP6Dby9UrlGxWRs70mJGupT23XY7XpbDbdzp6ncQ05bTQZ/exec'; 
+ const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyyZrpV9KFy9xx46GgW4oSDap9vP-6mFe3BeAJxvkrLncyp78Pd69JEvGYzVIRkMfhUGA/exec'; 
     fetch(googleScriptUrl)
         .then(response => response.json())
         .then(families => {
@@ -345,7 +356,75 @@ document.getElementById('submitBtn').addEventListener('click', function(e) {
             var activeButton = document.getElementById(tabId + 'Btn');
             activeButton.classList.add('active');
         }
+
 	showTab('home');
+    </script>
+ <script>
+        // Array of image sources
+        const images = ['IMG1.jpg', 'IMG2.jpg', 'IMG3.jpg', 'IMG4.jpg', 'IMG5.jpg'];
+        let currentIndex = 0; // The index of the current image
+
+        // Get DOM elements
+        const imageContainer = document.getElementById('imageContainer');
+        const leftArrow = document.getElementById('leftArrow');
+        const rightArrow = document.getElementById('rightArrow');
+
+        // Function to update images
+        function updateImages() {
+            // Get the three images
+            const imgElements = imageContainer.querySelectorAll('.carousel-image');
+
+            // Set the src attributes for each image
+            imgElements[0].src = images[(currentIndex - 1 + images.length) % images.length];
+            imgElements[1].src = images[currentIndex];
+            imgElements[2].src = images[(currentIndex + 1) % images.length];
+
+            // Reset all images to their base state (before transition)
+            imgElements.forEach(img => {
+                img.style.transition = 'none'; // Remove transition temporarily
+                img.style.transform = 'translateX(0)'; // Reset position
+            });
+
+            // Apply only the translateX transformation for initial positioning
+            setTimeout(() => {
+                imgElements[0].style.transition = 'transform .5s ease'; // Apply transition for movement
+                imgElements[1].style.transition = 'transform .5s ease'; 
+                imgElements[2].style.transition = 'transform .5s ease';
+
+                imgElements[0].style.transform = 'translateX(-10vw)';  // Left image moves to the left
+                imgElements[1].style.transform = 'translateX(0)';       // Center image remains centered
+                imgElements[2].style.transform = 'translateX(10vw)';   // Right image moves to the right
+            }, 50); // Delay before starting the translation
+
+            // After the translate transform, apply scaling to the center image
+            setTimeout(() => {
+                imgElements[1].style.transition = 'transform .5s ease'; // Apply transition for scaling
+                imgElements[1].style.transform = 'scale(1.4)'; // Apply scaling to center image
+
+                // Ensure the translateX is kept intact to maintain spacing
+                imgElements[0].style.transform = 'translateX(-10vw)';
+                imgElements[2].style.transform = 'translateX(10vw)';
+            }, 550); // This delay should match the transition time of the translate (500ms + small delay)
+        }
+
+        // Function to handle left arrow click
+        function moveLeft() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length; // Decrease index
+            updateImages();
+        }
+
+        // Function to handle right arrow click
+        function moveRight() {
+            currentIndex = (currentIndex + 1) % images.length; // Increase index
+            updateImages();
+        }
+
+        // Event listeners for arrow keys
+        leftArrow.addEventListener('click', moveLeft);
+        rightArrow.addEventListener('click', moveRight);
+
+        // Initialize the carousel
+        updateImages();
     </script>
 </body>
 </html>

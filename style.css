@@ -66,8 +66,8 @@ h1 {
 }
 p {
 color: #FFFFF0;
-margin: 0 8% 4% 8%;
-font-size: clamp(1em,3em,2vw);
+margin: 4%;
+font-size: 1.5em;
 }
 			/* HOME STYLES*/
 	#home h1 {
@@ -95,6 +95,61 @@ font-size: clamp(1em,3em,2vw);
 	   justify-content: flex-start;
 	   align-items: center;
 	}
+        .carousel-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 80vw;  /* Adjusted width to prevent full-screen overflow */
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .carousel-image {
+            width: 250px; /* Regular width */
+            height: 350px; /* Regular height */
+            object-fit: cover;
+            padding: 0; /* Space between images */
+            border-radius: 25px;
+            transition: transform .5s ease; /* Smooth transitions */
+            z-index: 0; /* Keep all images on the same layer */
+        }
+
+        .center-image {
+            transform: scale(1.4); /* Make the center image bigger */
+            z-index: 1; /* Bring the center image above others */
+            padding: 0 10px; /* Adjust padding when scaling */
+        }
+
+        .left-arrow, .right-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .left-arrow {
+            left: 0;
+        }
+
+        .right-arrow {
+            right: 0;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
 	#countdown {
 	    justify-content: center;
 		align-items: center;
@@ -106,7 +161,6 @@ font-size: clamp(1em,3em,2vw);
 	#name {
 	   display:flex;
 	   background-image: url('website-background.png');
-	   background-size: cover;
 	   width:100%;
 	   height: 20%;
   	   background-position: center;
@@ -114,13 +168,6 @@ font-size: clamp(1em,3em,2vw);
 	   align-items: center;
 	   justify-content: center;
 	}
-	#us-pictures {
-		background-image: url('us-pictures.png');
-		width:95%;
-		height: 30vh;
-		background-size: cover;
-		background-position: center;		
-		}
 	@media only screen and (max-width: 768px) {
 	  #home h1 {
 	   font-size: 5vw;
@@ -142,7 +189,16 @@ font-size: clamp(1em,3em,2vw);
 		#countdown {
 		font-size: 5vw;
 	}
+.carousel-image {
+    width: 50vw;
+    height: 350px;
+    object-fit: cover;
+    margin: 10px;
+    border-radius: 25px;
+    transition: transform .5s ease;
+    z-index: 0;
 	}
+}
 			/* RSVP STYLES*/
 	#rsvp {
 	display:flex;
@@ -295,18 +351,6 @@ label {
 	.link-container a:hover {
 	    color: blue;
 	}
-	#registry {
-		background-image: url('registry-background.png');
-		background-size: contain;
-		height: 800px;
-		background-repeat: no-repeat;
-		background-position: center;
-	}
-	/* #registry p{ */
-		 /* padding: 20px;  /* Adjust padding to fit your design */ */
-    /* background-color: rgba(255, 255, 255, 0.7);  /* Light white with transparency */ */
-    /* border-radius: 10px;  /* Optional: to give the box rounded corners */ */
-	/* } */
 			/* FUND STYLES*/
 	.note {
 	    font-size: 2vw;
@@ -373,7 +417,7 @@ label {
 			margin: 0% 15% 5% 15%;
 	}
 	.venue {
-		margin: 5% 13% 5% 13%; 
+		margin: 5% 0% 5% 0%; 
 	}
         .tab-content {
 		    position: absolute;
@@ -523,7 +567,6 @@ label {
 		    opacity: 0;
 		    visibility: hidden;
 		    transition: opacity 0.5s ease-in-out, visibility 0s .5s;
-		    margin-top: 14vh;
 		    flex-grow: 1;
 	      	    overflow-y: auto;
 	    }
@@ -539,6 +582,15 @@ label {
     header {
         display: none;
     }
+.carousel-image {
+    width: 50vw;
+    height: 350px;
+    object-fit: cover;
+    margin: 10px;
+    border-radius: 25px;
+    transition: transform .5s ease;
+    z-index: 0;
+}
 
     p {
         font-size: clamp(.70em,1.1em,2vw);
@@ -614,7 +666,6 @@ label {
 		    opacity: 0;
 		    visibility: hidden;
 		    transition: opacity 0.5s ease-in-out, visibility 0s .5s;
-		    margin-top: 14vh;
 	 	    max-width: 100%;
 	    }
 	    .active {
