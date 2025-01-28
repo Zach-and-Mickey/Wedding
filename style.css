@@ -9,11 +9,11 @@ body {
    padding: 0;
    color: rgb(254,130,140);
    text-align: center;
-   opacity:0;
-   width: 100%;
-   transition: opacity .75s ease-in-out;
+   max-width: 100%;
+   overflow-x: hidden;
+   height: auto;
 }
-header {
+#header {
    display: flex;
    justify-content: center;
    align-items: center;
@@ -27,51 +27,37 @@ header {
    height: 5vh;
    position: sticky;
    top:0;
+   white-space: no-wrap;
    z-index: 1000;
-   white-space: nowrap;
    max-width: 100%;
 }
-header a {
+#header button {
+   background: transparent;
+   border: none;
    color: black;
    text-decoration: none;
    padding: 1%;
    margin: 2%;
+   border-radius: 25px;
    font-size: 1.5rem;
+   font-family: 'Great Vibes', cursive;
    max-width: 90%;
+   transition: background-color 0.3s ease
 }
-#container {
-   display: flex;                /* Enable Flexbox */
-   justify-content: flex-start;       /* Center items horizontally */
-   align-items: center;           /* Center items vertically */
-   min-height: 100vh;                 /* Take full viewport height */
-   padding-top: 5%;
-   max-width: 100%;
-   flex-direction: column;        /* Stack the content vertically */
-   background-color: black;      /* Set background color */
-   color: rgb(254,130,140);       /* Text color */
-   font-family: 'Courgette', serif;  /* Font */
-   text-align: center;            /* Center text inside */
-   margin: 0;
-}
-header a:hover {
+
+#header button:hover {
     background-color: rgb(80,200,120);
     color: rgb(254,130,140);
     border-radius: 25px;
     text-shadow: 3px 3px 3px rgb(0,0,0);
     transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover transition */
 }
-header a.active {    
+#header button.active {    
     background-color: rgb(80,200,120);
     color: rgb(254,130,140);
     border-radius: 25px;
     text-shadow: 3px 3px 3px rgb(0,0,0);
     transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover transition */
-}
-body.fade-out {
-    opacity: 0;
-}
-body.fade-in {
-    opacity: 1;
 }
 h1 {
     font-family: 'Norican', serif;
@@ -80,9 +66,330 @@ h1 {
 }
 p {
 color: #FFFFF0;
-margin: 4%;
-font-size: 1.5em;
+margin: 0 8% 4% 8%;
+font-size: clamp(1em,3em,2vw);
 }
+			/* HOME STYLES*/
+	#home h1 {
+	    font-size: 2.5vw;
+		font-family: "Leckerli One", serif;
+		font-weight: 100;
+		font-style: normal;
+		text-decoration: none;
+		color: #FFFFF0;
+		margin-bottom:0;
+	}
+	#welcome {
+	    font-size: 3vw;
+		font-family: "Alex Brush", serif;
+		font-weight: 400;
+		font-style: normal;
+		margin: 1vh;
+	}
+	#bounding {
+	   display: flex;
+	   height: 90vh;
+ 	   width: 100vw;
+	   margin-top: 5vh;
+	   flex-direction: column;
+	   justify-content: flex-start;
+	   align-items: center;
+	}
+	#countdown {
+	    justify-content: center;
+		align-items: center;
+		width: auto;
+		font-size: 1.5vw;
+		margin-top: .5vw;
+		margin-bottom: 2vw;
+	}
+	#name {
+	   display:flex;
+	   background-image: url('website-background.png');
+	   background-size: cover;
+	   width:100%;
+	   height: 20%;
+  	   background-position: center;
+       background-repeat: no-repeat;
+	   align-items: center;
+	   justify-content: center;
+	}
+	#us-pictures {
+		background-image: url('us-pictures.png');
+		width:95%;
+		height: 30vh;
+		background-size: cover;
+		background-position: center;		
+		}
+	@media only screen and (max-width: 768px) {
+	  #home h1 {
+	   font-size: 5vw;
+	}
+		#bounding {
+		margin-top: 12vh;
+		}
+		#name {
+		background-size: 250%;
+		}
+		#us-pictures {
+		width: 100%;
+		margin: 0;
+		overflow-x: clip;
+		}
+		#welcome {
+		font-size: 5vw;
+	}
+		#countdown {
+		font-size: 5vw;
+	}
+	}
+			/* RSVP STYLES*/
+	#rsvp {
+	display:flex;
+	justify-content: flex-start;
+	align-items: center;
+	min-height: auto;
+	max-width: 100%;
+	flex-direction: column;
+	}
+        #submitBtn {
+            padding: .5%;
+            background-color: white;
+	    font-size: 1em;
+	    
+            color: black;
+            border: 2px solid white;
+            cursor: pointer;
+	    margin: 2%;
+	    border-radius: 25%;
+        }
+        #submitBtn:hover {
+            background-color: rgb(254,130,140);
+        }
+        #search {
+            padding: .5%;
+			font-size: 1.75em;
+			background-color: rgb(80,200,120);
+			color: white;
+			border-radius: 20px;
+			border: 2px solid white;
+			text-align: center;
+        }
+		#rsvp-countdown {
+		margin: 1vh;
+		padding: 1vh;
+		}
+		.countdown {
+		margin: 1vh;
+		padding: 1vh;
+		}
+		.deadline {
+		color: rgb(254,130,140);
+		margin-top:0;
+		}
+	input::placeholder {
+	    color:black
+	}
+	label[for='search'] {
+	font-size: 1.75em;
+	}
+
+        /* Style for autocomplete suggestions */
+        .autocomplete-suggestions {
+	    
+            border: 1px solid white;
+            min-height: 10%;
+            overflow-y: auto;
+            background-color: black;
+            z-index: 10;
+            width: 50%;
+	    margin: 2% auto;
+	    font-size: 2em;
+        }
+
+        .autocomplete-suggestion {
+            padding: 2%;
+            cursor: pointer;
+        }
+
+        .autocomplete-suggestion:hover {
+            background-color: gray;
+        }
+	.member-container {
+    display: flex;
+    align-items: center;  /* Align items vertically in the center */
+    justify-content: right;
+    margin-bottom: 15px;  /* Add spacing between family members */
+    font-size: 2em;  /* Adjust font size */
+}
+
+/* Member name style */
+.member-name {
+    margin-right: 10%;
+    white-space: nowrap;  /* Space between name and checkboxes */
+    flex-grow: 1;
+}
+
+/* Style for the Yes/No checkboxes */
+input[type="checkbox"] {
+    transform: scale(1.5);  /* Increase checkbox size */
+    margin-right: 2%;  /* Space between checkbox and label */
+    accent-color: rgb(80, 200, 120);
+}
+
+/* Label for Yes/No checkboxes */
+label {
+    font-size: 1em;
+    margin-right: 2%;  /* Space between labels */
+}
+
+/* Container for the family members */
+#familyMembersContainer {
+    display: flex;
+    flex-direction: column;  /* Stack family members vertically */
+    margin-top: 2.5%;
+}
+#email{
+	margin: 5vh;
+	padding: 1vh;
+	background-color: rgb(80,200,120);
+	color: white;
+	border-radius: 20px;
+	border: 2px solid white;
+	text-align: center;
+}
+		/*----------- PHONE SCREEN STYLING----------------*/
+@media screen and (max-width: 768px) {
+    .member-container {
+    display: flex;
+    align-items: center;  /* Align items vertically in the center */
+    justify-content: right;
+    margin-bottom: 15px;  /* Add spacing between family members */
+    font-size: 1em;  /* Adjust font size */
+}
+        .autocomplete-suggestions {
+	    
+            border: 1px solid white;
+            min-height: 10%;
+            overflow-y: auto;
+            background-color: black;
+            z-index: 10;
+            width: 50%;
+	    margin: 2% auto;
+	    font-size: 1em;
+        }
+}
+			/* REGISTRY STYLES*/
+	.link-container {
+	    display: flex;
+	    justify-content: center;
+	    gap: 5%;
+	    font-size: 2em;
+	    margin: 5%;
+	    margin-top: 0;
+	}
+	.link-container a {
+	    color: rgb(254,130,140);
+	    transition: color .3s ease;
+	}
+	.link-container a:hover {
+	    color: blue;
+	}
+	#registry {
+		background-image: url('registry-background.png');
+		background-size: contain;
+		height: 800px;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	/* #registry p{ */
+		 /* padding: 20px;  /* Adjust padding to fit your design */ */
+    /* background-color: rgba(255, 255, 255, 0.7);  /* Light white with transparency */ */
+    /* border-radius: 10px;  /* Optional: to give the box rounded corners */ */
+	/* } */
+			/* FUND STYLES*/
+	.note {
+	    font-size: 2vw;
+	    font-family: Arial, sans-serif;
+	    color: pink;
+	}
+	.above_p {
+	    margin: 5%;
+	    margin-bottom: 0;
+	}
+	.parentheses {
+	    margin: 5%;
+	    margin-top: 0;
+	}
+	#paypal-container-button {
+	    display: flex;
+	    text-align: center;
+	    justify-content: center;
+	    align-items: center;
+	}
+	input[type='number'] {
+	    text-align: center;
+	}
+	@media only screen and (max-width: 768px) {
+	#paypal-form-fields-container-WKZBTN5WE4VUQ {
+		display: flex;
+	    text-align: center;
+	    justify-content: center;
+	    align-items: center;
+	}
+	form {
+	width: 50%;
+	justify-content: center;
+	align-items: center;
+	}
+}
+			/* FAQ STYLES*/
+	#faq h2 {
+	    text-decoration: underline;
+		font-size: clamp(1em,3em,4vw);
+		margin: 0% 15% 0% 15%;
+	}
+	#faq h3 {
+	    font-family: 'Norican', serif;
+	    font-size: clamp(1em,3em,4vw);
+		font-weight: 100;
+		text-decoration: underline;
+	    <!-- align-self: flex-staf; -->
+	    <!-- text-align:left; -->
+	    <!-- margin-left: 2%; -->
+	}
+	.answers {
+	    font-size: clamp(.75em,2em,3vw);
+		margin: 0% 15% 5% 15%;
+	    <!-- align-self: flex-start; -->
+        <!-- text-align: left; -->
+	    padding: 2% 5% 2% 5%;
+	}
+	.intro {
+			margin: 0% 15% 5% 15%;
+			font-size: clamp(.5em,1.7em,3vw);
+	}
+	.questions {
+			margin: 0% 15% 5% 15%;
+	}
+	.venue {
+		margin: 5% 13% 5% 13%; 
+	}
+        .tab-content {
+		    position: absolute;
+		    opacity: 0;
+		    visibility: hidden;
+		    transition: opacity 0.5s ease-in-out, visibility 0s .5s;
+		    margin-top: 6vh;
+		    min-height: 0;
+		    flex-grow: 1;
+	 	    overflow-y: auto;
+	    }
+	    .active {
+		    opacity:1;
+		    visibility: visible;
+		    transition: opacity .5s ease-in-out, visibility 0s;
+	    }
 		/* MENU BUTTON BLOCK */
         .menu-btn {
             display: none;  /* Initially hide the menu button */
@@ -95,40 +402,44 @@ font-size: 1.5em;
             position: absolute;  /* Position it at the top of the screen */
             top: 10%;  /* Position it below the button */
             left: 50%;
-			width: 50%;
-			transform: translate(-50%);
+	    width: 50%;
+	    transform: translate(-50%);
             background-color: black;
             color: rgb(254,130,140);
-			font-family: 'Great Vibes', serif;
+	    font-family: 'Great Vibes', serif;
             text-align: center;
-			justify-content: center;
-			align-items: center;
-			font-size: 1.25em;
-			font-weight: 500;
+	    justify-content: center;
+	    align-items: center;
+	    font-size: 1.25em;
+	    font-weight: 500;
             z-index: 1000;
-			border: 5px outset rgb(254,130,140);
-			/*box-shadow: 5px 5px 5px rgb(254,130,140); */
+	    border: 5px outset rgb(254,130,140);
+	    flex-direction: column;
+	    /*box-shadow: 5px 5px 5px rgb(254,130,140); */
         }
 
-        .dropdown-menu a {
-            display: block;
+        .dropdown-menu button {
+            display: flex;
+	    flex-direction: column;
+	    font-family: 'Great Vibes', serif;
             padding: 2%;
+	    width: 100%;
+  	    align-items: center;
             text-decoration: none;
 	    font-size: 1.5em;
             color: rgb(254,130,140);
         }
 
-        .dropdown-menu a:hover {
+        .dropdown-menu button:hover {
             background-color: #444;
         }
 		
-		.dropdown-menu a.active {
+	.dropdown-menu button.active {
             background-color: #444;
         }
 	.button-container {
 	    display:none;
 	}
-
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
     header {
@@ -149,7 +460,7 @@ font-size: 1.5em;
     }
 
     .menu-btn {
-        display: block;  /* Show the menu button */
+        display: flex;  /* Show the menu button */
         background-color: black;
         color: #FFFFF0;
         font-size: 30px;
@@ -167,15 +478,16 @@ font-size: 1.5em;
 
     .button-container {
         display: flex;
+	flex-direction: column;
         justify-content: center;
         align-items: center;
         font-family: 'Great Vibes', cursive;
         order: 0;
         background-image: linear-gradient(to right, rgba(200,120,130,.5), rgba(254,130,140,1), rgba(200,120,130,.5));
         color: black;
-        padding: 2%;
         text-align: center;
         font-size: 1.5em;
+	padding: 2% 0 2% 0;
         height: auto;
         position: absolute;
         top: 0;
@@ -183,6 +495,43 @@ font-size: 1.5em;
         white-space: nowrap;
         width: 100%;
     }
+    .dropdown-menu {
+	display: none;
+     }
+    .dropdown-menu.active {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content:center;
+    }
+    .dropdown-menu button {
+	background-color: black;
+	padding: 2%;
+	border: none;
+	text-align: center;
+	font-size: 1.5em;
+	height: auto;
+    }
+    .dropdown-menu button:hover {
+	background-color: gray;
+    }
+    .dropdown-menu button.active {
+	background-color: #444;
+    }
+        .tab-content {
+		    position: absolute;
+		    opacity: 0;
+		    visibility: hidden;
+		    transition: opacity 0.5s ease-in-out, visibility 0s .5s;
+		    margin-top: 14vh;
+		    flex-grow: 1;
+	      	    overflow-y: auto;
+	    }
+	    .active {
+		    opacity:1;
+		    visibility: visible;
+		    transition: opacity .5s ease-in-out, visibility 0s;
+	    }
 }
 
 /* Media Query for Small Screens (max-width: 480px) */
@@ -192,7 +541,7 @@ font-size: 1.5em;
     }
 
     p {
-        font-size: 1.1em;
+        font-size: clamp(.70em,1.1em,2vw);
     }
 
     h1 {
@@ -205,12 +554,12 @@ font-size: 1.5em;
 
     .menu-btn {
         display: block;  /* Show the menu button */
-        background-color: #FFFFF0;
-        color: rgb(80,200,120);
+        background-color: black;
+        color: #FFFFF0;
         font-size: 30px;
         padding: 1% 2%;
         margin: 1%;
-        border: 2px ridge black;
+        border: 2px ridge #FFFFF0;
         border-radius: 20%;
         cursor: pointer;
     }
@@ -227,14 +576,52 @@ font-size: 1.5em;
         order: 0;
         background-image: linear-gradient(to right, rgba(200,120,130,.5), rgba(254,130,140,1), rgba(200,120,130,.5));
         color: black;
-        padding: 2%;
         text-align: center;
         font-size: 1.5em;
         height: auto;
+	padding: 2% 0 2% 0;
         position: absolute;
         top: 0;
         z-index: 900;
         white-space: nowrap;
         width: 100%;
     }
+    .dropdown-menu {
+	display: none;
+     }
+    .dropdown-menu.active {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content:center;
+    }
+    .dropdown-menu button {
+	background-color: black;
+	padding: 2%;
+	border: none;
+	text-align: center;
+	font-size: 1.5em;
+	height: auto;
+    }
+    .dropdown-menu button:hover {
+	background-color: gray;
+    }
+    .dropdown-menu button.active {
+	background-color: #444;
+    }
+        .tab-content {
+		    position: absolute;
+		    opacity: 0;
+		    visibility: hidden;
+		    transition: opacity 0.5s ease-in-out, visibility 0s .5s;
+		    margin-top: 14vh;
+	 	    max-width: 100%;
+	    }
+	    .active {
+		    opacity:1;
+		    visibility: visible;
+		    transition: opacity .5s ease-in-out, visibility 0s;
+	    }
+}
+
 }

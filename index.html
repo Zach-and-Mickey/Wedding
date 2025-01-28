@@ -7,98 +7,116 @@
 	<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Leckerli+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Homepage</title>
-    <script src="fade_script.js"></script>
-    <style>
-	h1 {
-	    font-size: 2.5vw;
-		font-family: "Leckerli One", serif;
-		font-weight: 100;
-		font-style: normal;
-		text-decoration: none;
-		color: #FFFFF0;
-		margin-bottom:0;
-	}
-	#welcome {
-	    font-size: 3vw;
-		font-family: "Alex Brush", serif;
-		font-weight: 400;
-		font-style: normal;
-		margin: 1vh;
-	}
-	#bounding {
-	   display: flex;
-	   height: 90vh;
-	   margin-top: 5vh;
-	   flex-direction: column;
-	   justify-content: flex-start;
-	   align-items: center;
-	}
-	#countdown {
-	    justify-content: center;
-		align-items: center;
-		width: auto;
-		font-size: 1.5vw;
-		margin-top: .5vw;
-		margin-bottom: 2vw;
-	}
-	#name {
-	   display:flex;
-	   background-image: url('website-background.png');
-	   background-size: cover;
-	   width:100%;
-	   height: 20%;
-  	   background-position: center;
-       background-repeat: no-repeat;
-	   align-items: center;
-	   justify-content: center;
-	}
-	#us-pictures {
-		background-image: url('us-pictures.png');
-		width:95%;
-		height: 30vh;
-		background-size: cover;
-		background-position: center;		
-		}
-	@media only screen and (max-width: 768px) {
-	   h1 {
-	   font-size: 5vw;
-	}
-		#bounding {
-		margin-top: 12vh;
-		}
-		#name {
-		background-size: 200%;
-		}
-		#us-pictures {
-		width: 125%;
-		margin: 0;
-		}
-		#welcome {
-		font-size: 5vw;
-	}
-		#countdown {
-		font-size: 5vw;
-	}
-	}
-    </style>
+
 </head>
 <body>
 
     <header>
-        <a href="index.html" class='link'>Home</a>
-        <a href="rsvp.html" class='link'>RSVP</a>
-        <a href="registry.html" class='link'>Registry</a>
-        <a href="funds.html" class='link'>Honeymoon Fund</a>
-        <a href="faq.html" class='link'>FAQs</a>
+	<div id='header'>
+        <button onclick="showTab('home')" id='homeBtn'>Home</button>
+        <button onclick="showTab('rsvp')" id='rsvpBtn'>RSVP</button>
+        <button onclick="showTab('registry')" id='registryBtn'>Registry</button>
+        <button onclick="showTab('honeymoon')" id='honeymoonBtn'>Honeymoon Fund</button>
+        <button onclick="showTab('faq')" id='faqBtn'>FAQs</button>
+	</div>
     </header>
-
+<div id='home' class='tab-content active'>
     <div id="bounding">
 			<div id='name'></div>
 			<div id='us-pictures'></div>
-	<h1>The Wedding Day</h1>
+	<h1>Our Wedding Day</h1>
 	<p id='countdown'></p>
 	<p id='welcome'>Welcome to our wedding website! We are so glad you are a part of our special day!</p>
     </div>
+</div>
+
+<div id='rsvp' class='tab-content'>
+    <p class="main">Please type in your email below and then search for any name included on the wedding invitation. This will bring up your entire party. Please select Yes or No for each person in your party, including plus ones. The wedding invitation included all the names of your party and whether a plus one was being accommodated. Click the RSVP button, and you're done! Thank you for understanding; this will be a small wedding, and our guest list was limited. <br> <br> If you are having trouble, please email us at MiKandZSledge@gmail.com, and we will assist you! We appreciate everyone who will be joining us that day! Be sure to check out the FAQs section for any questions you may have! 
+
+An email confirmation will be sent after your RSVP is submitted to confirm your party! </p>
+    <p class="deadline">The deadline to RSVP is April 15th. </p>
+	<p class='countdown'>Time left to register!</p>
+	<p id='rsvp-countdown'></p>
+	<input type='email' id='email' placeholder="Your Email Address...">
+
+    <label for="search">Search for a family:</label>
+    <input type="text" id="search" placeholder="..." oninput="filterFamilies()">
+    
+      <!-- Autocomplete suggestions container -->
+    <div id="autocompleteSuggestions" class="autocomplete-suggestions"></div>
+    
+    <!-- Family members checkboxes -->
+    <div id="familyMembersContainer" class="checkbox-group">
+        <!-- Checkboxes will appear here dynamically when a family is selected -->
+    </div>
+
+    <button id="submitBtn">RSVP</button>
+</div>
+
+<div id='registry' class='tab-content'>
+    <main>
+        <p>While gifts are not required, we are thankful for anything that can be given to help us in this transition together! These are our wants and needs for our future household. We appreciate anything you can purchase for us! Please no substitutions or added items as we do not have room to store added items or decor. Please include gift receipts for items in case something is broken or does not work upon delivery! There also is an option to donate towards our honeymoon if you are unsure of what item to get or would rather send cash! Any checks written can be made out to "Zachary Sledge" with the memo as "wedding."</p>
+	
+	<div class="link-container">
+	<a href="https://www.amazon.com/wedding/share/MiKandZ">Amazon</a>
+	</div>
+    </main>
+</div>
+
+<div id='honeymoon' class='tab-content'>
+	<p>This money will be used for our honeymoon! As well as any last minute household needs we did not think about or items that were not purchased! We greatly appreciate everything bought or any money being sent! Thank you for supporting us in this new chapter of our lives!</p>
+	<p>You can select your preferred payment method below.</p>
+	<p class='above_p'>Any checks written can be made out to "Zachary Sledge" with the memo as "Wedding."</p>
+	<p class='parentheses'>(This allows for all checks to be cashed without a problem during the name change!)</p>
+	<p class='note'> Note: There will be a 3% processing charge on all credit card transactions.</p>
+<div id="paypal-container-button"></div>
+</div>
+
+<div id='faq' class='tab-content'>
+	<p class="intro">We hope your questions can be answered here! 
+		If you have a question that is not answered here, you can email your question to
+		mikandzsledge@gmail.com.</p>
+	<h2>Venue Information</h2>
+	<p class='venue'>The venue is TBD. <br> The address is TBD. <br> There is a short walk to the ceremony and reception area, but golf carts will be available to guests!</p>
+	<h2 class='questions'>Frequently Asked Questions</h2>
+	<h3>When should I arrive?</h3>
+	<p class="answers">The wedding starts at 5:00 P.M. Guests can begin arriving 30 minutes prior! Any late arrivals can
+			    quietly sit in the back. If the ceremony has begun and the wedding party is still walking out, please
+			    allow them to finish before sitting down!</p>
+	<h3>Is there a Ceremony and a Reception? </h3>
+	<p class='answers'>Yes! The ceremony will take place outside unless rain is expected. Please plan accordingly as it will be May and
+ 			   could potentially be hot. Hand fans will be provided on guests' chairs! The reception will be indoors with AC, Yay!
+	<h3>Is there a Dress Code?</h3>
+	<p class='answers'>We ask you to dress business casual, semi-formal, or formal. Whatever <strong>suits</strong> you! Please save the white for the bride.</p>
+	<h3>Will there be Alcohol served?</h3>
+	<p class='answers'>There will be no alcohol served at the wedding. We hope everyone can remember the wedding day.</p>
+	<h3>What kind of Food will be served?</h3>
+	<p class='answers'>We will be having a food truck! This food truck will serve a variety of burgers with food allergies or restrictions in mind!
+			   We also will have a side bar, salad bar, and fruit bar! We hope there will be plenty of options for everyone to enjoy!</p>
+	<h3>Can I take pictures?</h3>
+	<p class='answers'>While we appreciate you wanting to capture our special moment, we ask that you do not take pictures during the ceremony!
+			   Feel free to take some before the ceremony begins!  We want everyone to be present in the moment with no distractions! Take as many photos 
+			   during the reception as you like! <br> <br> We also ask that no photos be posted until the couple can post from that day! After that, feel free to post
+			   and use <underline>#MZSledgeWedding so we can view them! <br><br> There will also be a QR code located on your table at the reception. You can use this QR code
+	 		   to upload your photos to a shared album that all guests can view. We look forward to seeing the reception from your point of view! </p>
+	<h3>Can I bring a plus one?</h3>
+	<p class='answers'>The invitation included the names of anyone who was invited to the wedding including whether or not a plus one was allowed. We apologize we could not accomodate for all plus ones.</p>
+	<h3>Where can I send money?</h3>
+	<p class='answers'>We have a specific tab for our honeymoon or last minute gift items! Thank you for your gift, we appreciate it greatly!</p>
+	<h3>Where are you registered?</h3>
+	<p class='answers'>There is a separate tab with all of our registry links. Please purchase through these links so duplicate gifts are avoided! <br>
+			   We ask for no subsitutions or additional items as we have limited space to store things! Please also include gift receipts with gifts in case something is damaged or broken! </p>
+	<h3>Can I bring a gift to the wedding?</h3>
+	<p class='answers'>While we appreciate your desire to bring a gift, we ask all gifts to be sent directly to us or given during a wedding shower or
+			   another time! There will be a card box for cards on the day of the wedding! We appreciate anything given and gifts are not a requirement!</p>
+	<h3>I can't attend but want to celebrate with y'all.</h3>
+	<p class='answers'>We understand a Tuesday wedding is not traditional and may not work for everyone who is invited and wants to attend. We hope a time can be set up to celebrate with you personally! 
+			   We also will be having several wedding showers that many guests will be invited to!<br><br> There will also be a video recording of the ceremony
+			   and moments from the reception that will be shared when available to us! If you would like to be included in the shared album of the reception please view the homepage for the corresponding QR Code!</p>
+</div>
+
+
+
 
     <!-- Hamburger Icon (Dropdown Button) -->
     <div class='button-container'>
@@ -107,28 +125,227 @@
 
     <!-- Dropdown Menu -->
     <div class="dropdown-menu" id="dropdownMenu">
-        <a href="index.html" class='link'>Home</a>
-        <a href="rsvp.html" class='link'>RSVP</a>
-        <a href="registry.html" class='link'>Registry</a>
-        <a href="funds.html" class='link'>Honeymoon Fund</a>
-        <a href="faq.html" class='link'>FAQs</a>
+        <button  data-section='home' id='homeBtn' class='active'>Home</button>
+        <button  data-section='rsvp' id='rsvpBtn'>RSVP</button>
+        <button  data-section='registry' id='registryBtn'>Registry</button>
+        <button  data-section='honeymoon' id='honeymoonBtn'>Honeymoon Fund</button>
+        <button  data-section='faq' id='faqBtn'>FAQs</button>
     </div>
 
 <script src='dropdown.js'></script>
 <script src="countdown.js"></script>
+<script src='RSVP_countdown.js'></script>
+<script>
+    let familiesData = [];
 
-  <script>
-    const currentPage = window.location.pathname;
-    const navLinks = document.querySelectorAll('.link');
-    console.log(currentPage);
-    console.log(navLinks);
-    navLinks.forEach(link => {
-      if (link.href.includes(currentPage)) {
-        link.classList.add('active');
-      } else {
-	link.classList.remove('active');
-      }
+    // Fetch family data from Google Apps Script
+ const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbzYOZ20ckwdE_ZdJyQArQOP6Dby9UrlGxWRs70mJGupT23XY7XpbDbdzp6ncQ05bTQZ/exec'; 
+    fetch(googleScriptUrl)
+        .then(response => response.json())
+        .then(families => {
+            familiesData = families;
+            
+        })
+        .catch(error => {
+            console.error('Error fetching families:', error);
+        });
+
+     // Function to filter families based on the search input and display autocomplete
+    function filterFamilies() {
+        const searchValue = document.getElementById('search').value.toLowerCase();
+        const autocompleteContainer = document.getElementById('autocompleteSuggestions');
+        autocompleteContainer.innerHTML = ''; // Clear previous suggestions
+
+        if (searchValue === '') {
+		autocompleteContainer.innerHTML = '';
+ 		familyMembersContainer.innerHTML = '';
+            return; // Exit early if search value is empty
+        }
+
+        // Filter families and their members based on search input
+        const filteredFamilies = familiesData.filter(family => 
+            family.members.some(member => member.toLowerCase().includes(searchValue))
+        );
+
+        // If no matching results, return early
+        if (filteredFamilies.length === 0) {
+            return;
+        }
+
+        // Populate the autocomplete suggestions
+        filteredFamilies.forEach(family => {
+            family.members.forEach(member => {
+                if (member.toLowerCase().includes(searchValue)) {
+                    const suggestionItem = document.createElement('div');
+                    suggestionItem.classList.add('autocomplete-suggestion');
+                    suggestionItem.textContent = member;
+
+                    // Add an event listener to handle selection
+                    suggestionItem.addEventListener('click', function() {
+                        selectFamilyMember(member);
+                    });
+
+                    autocompleteContainer.appendChild(suggestionItem);
+                }
+            });
+        });
+    }
+
+    // Function to handle the selection of an autocomplete suggestion
+    function selectFamilyMember(member) {
+        const searchInput = document.getElementById('search');
+        searchInput.value = member;  // Set the input field to the selected member
+        document.getElementById('autocompleteSuggestions').innerHTML = '';  // Clear suggestions
+
+        // Filter and show the family members for the selected member
+        showFamilyMembers(member);
+    }
+
+    // Function to display family members based on the selected family member
+    function showFamilyMembers(selectedMember) {
+        const familyMembersContainer = document.getElementById('familyMembersContainer');
+        familyMembersContainer.innerHTML = '';  // Clear previous checkboxes
+
+        // Find the family this member belongs to
+        const selectedFamily = familiesData.find(family => 
+            family.members.includes(selectedMember)
+        );
+
+        if (selectedFamily) {
+            // Create checkboxes for the family members
+ 	        selectedFamily.members.forEach(member => {
+            const memberContainer = document.createElement('div');
+            memberContainer.classList.add('member-container');
+            
+            // Display the family member name
+            const memberName = document.createElement('span');
+            memberName.classList.add('member-name');
+            memberName.textContent = member;  // Display member name
+
+            // Create 'Yes' checkbox
+            const yesCheckbox = document.createElement('input');
+            yesCheckbox.type = 'checkbox';
+            yesCheckbox.name = 'attendees_yes';  // Different name to distinguish 'Yes' RSVPs
+            yesCheckbox.value = member;
+            yesCheckbox.id = member + '-yes';
+
+            const yesLabel = document.createElement('label');
+            yesLabel.htmlFor = member + '-yes';
+            yesLabel.textContent = 'Yes';
+
+            // Create 'No' checkbox
+            const noCheckbox = document.createElement('input');
+            noCheckbox.type = 'checkbox';
+            noCheckbox.name = 'attendees_no';  // Different name to distinguish 'No' RSVPs
+            noCheckbox.value = member;
+            noCheckbox.id = member + '-no';
+
+            const noLabel = document.createElement('label');
+            noLabel.htmlFor = member + '-no';
+            noLabel.textContent = 'No';
+
+            // Append the name and checkboxes to the member container
+            memberContainer.appendChild(memberName);
+            memberContainer.appendChild(yesCheckbox);
+            memberContainer.appendChild(yesLabel);
+            memberContainer.appendChild(noCheckbox);
+            memberContainer.appendChild(noLabel);
+
+            // Append the member container to the family members container
+            familyMembersContainer.appendChild(memberContainer);
+        });
+    }
+}
+// Handle the form submission
+document.getElementById('submitBtn').addEventListener('click', function(e) {
+    e.preventDefault();  // Prevent default button click behavior
+
+    const formData = new FormData();
+    const selectedYesMembers = Array.from(document.querySelectorAll('input[name="attendees_yes"]:checked'))
+        .map(checkbox => checkbox.value);
+    const selectedNoMembers = Array.from(document.querySelectorAll('input[name="attendees_no"]:checked'))
+        .map(checkbox => checkbox.value);
+
+    console.log(selectedYesMembers);
+    console.log(selectedNoMembers);
+
+    // Check if no attendees were selected
+    if (selectedYesMembers.length === 0 && selectedNoMembers.length === 0) {
+        alert("Please select at least one attendee.");
+        return;
+    }
+
+    // Append selected attendees to form data
+    selectedYesMembers.forEach(member => {
+        formData.append('attendees_yes', member);
+    });
+
+    selectedNoMembers.forEach(member => {
+        formData.append('attendees_no', member);
+    });
+
+    // Fetch email value for submission
+    const email = document.getElementById('email').value;
+    if (email.length === 0) {
+	alert("Please add your email address.");
+	return;
+    }
+
+    // Submit the form data to the backend (or proxy server)
+    fetch(googleScriptUrl, {  // Replace with your production URL
+		redirect: 'follow',
+        method: 'POST',
+        body: JSON.stringify({
+            email: email,
+            attendees_yes: selectedYesMembers,
+            attendees_no: selectedNoMembers
+        }),
+        headers: {
+            'Content-Type': 'text/plain;charset=utf-8',
+        },
     })
-  </script>
+    .then(response => response.json())
+    .then(data => {
+        alert('RSVP submitted successfully');
+        console.log(data);  // Log the response data from the server
+    })
+    .catch(error => {
+        console.error('Error submitting RSVP:', error);
+        alert('Error submitting RSVP');
+    });
+});
+</script>
+<script src="https://www.paypal.com/sdk/js?client-id=BAA0ogZ9aWvdJl-eBoFKPMPS9HCrMPOgIRAsVBcjN5IT7fQJRKod5gM2vv34UHvyhKYpbSXIU8Rkshu_0o&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
+
+<script>
+  paypal.HostedButtons({
+    hostedButtonId: "WKZBTN5WE4VUQ",
+  }).render("#paypal-container-button")
+</script>
+    <script>
+        // JavaScript function to show the appropriate tab content
+        function showTab(tabId) {
+            // Hide all content sections
+            var tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(function(tab) {
+                tab.classList.remove('active');
+            });
+
+            // Show the clicked tab content
+            var activeTab = document.getElementById(tabId);
+            activeTab.classList.add('active');
+
+            // Remove active class from all buttons
+            var buttons = document.querySelectorAll('#header button');
+            buttons.forEach(function(button) {
+                button.classList.remove('active');
+            });
+
+            // Add active class to the clicked button
+            var activeButton = document.getElementById(tabId + 'Btn');
+            activeButton.classList.add('active');
+        }
+	showTab('home');
+    </script>
 </body>
 </html>

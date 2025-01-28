@@ -1,13 +1,32 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const menuBtn = document.querySelector('.menu-btn');  // Button to toggle dropdown
+    const dropdownMenu = document.querySelector('.dropdown-menu');  // Dropdown menu
+    const dropdownButtons = dropdownMenu.querySelectorAll('button');  // Buttons inside the dropdown
+    const sections = document.querySelectorAll('.tab-content');  // Content sections (to show/hide)
 
-        // Get the button and menu elements
-        const menuBtn = document.getElementById('menuBtn');
-        const dropdownMenu = document.getElementById('dropdownMenu');
+    // Toggle dropdown visibility
+    menuBtn.addEventListener('click', () => {
+        dropdownMenu.classList.toggle('active');  // Show/hide dropdown
+    });
 
-        // Toggle dropdown menu visibility when the button is clicked
-        menuBtn.addEventListener('click', () => {
-            if (dropdownMenu.style.display === 'block') {
-                dropdownMenu.style.display = 'none';  // Hide menu
-            } else {
-                dropdownMenu.style.display = 'block';  // Show menu
-            }
+    // Handle section selection and close dropdown
+    dropdownButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const sectionId = button.getAttribute('data-section');
+            const targetSection = document.getElementById(sectionId);
+
+            // Hide all sections
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Show the selected section
+            targetSection.classList.add('active');
+
+            // Close the dropdown
+            dropdownMenu.classList.remove('active');
+
+            // Update active button styles
+            dropdownButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
         });
+    });
+});
