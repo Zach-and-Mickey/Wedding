@@ -394,6 +394,7 @@ label {
 	    text-align: center;
 	    justify-content: center;
 	    align-items: center;
+	    translate: -14%;
 	}
 	form {
 	width: 50%;
@@ -410,7 +411,7 @@ label {
 	}
 	#faq h3 {
 	    font-family: 'Norican', serif;
-	    font-size: clamp(1em,3em,4vw);
+	    font-size: clamp(1.2em,3em,4vw);
 		font-weight: 100;
 		text-decoration: underline;
 	    <!-- align-self: flex-staf; -->
@@ -511,8 +512,8 @@ label {
 
     p {
         font-size: 1.2em;
-        margin: 2%;
-        margin-top: 6vh;
+        margin: 4% 12vw;
+        margin-top: 15vh;
     }
 
     h1 {
@@ -613,7 +614,7 @@ label {
 }
 
     p {
-        font-size: clamp(.70em,1.1em,2vw);
+        font-size: clamp(.90em,1.1em,2vw);
 	margin-top: 15vh;
     }
 
