@@ -417,7 +417,7 @@ label {
 	    padding: 2% 5% 2% 5%;
 	}
 	.intro {
-			margin: 15vh 15% 5% 15%;
+			margin: 4% 15% 5% 15%;
 			font-size: clamp(.5em,1.7em,3vw);
 	}
 	.questions {
@@ -425,6 +425,11 @@ label {
 	}
 	.venue {
 		margin: 5VW 15VW 5VW 15VW; 
+	}
+	@media screen and (max-width: 768px) {
+    .intro {
+	margin: 15vh 15% 5% 15%;
+}
 	}
         .tab-content {
 		    position: absolute;
