@@ -345,6 +345,10 @@ label {
         }
 }
 			/* REGISTRY STYLES*/
+	main {
+		display:flex;
+		flex-direction: column;
+	}
 	.link-container {
 	    display: flex;
 	    justify-content: center;
@@ -398,6 +402,18 @@ label {
 	    align-items: center;
 	    translate: -8%;
 	}
+	#registry-background {
+    display: flex;
+    background-image: url(registry-background.png);
+    width: 100VW;
+    HEIGHT: 50%;
+    background-position: bottom CENTER;
+    background-size: cover;
+    BACKGROUND-REPEAT: NO-REPEAT;
+    POSITION: FIXED;
+    Z-INDEX: -1;
+    BOTTOM: 0;
+	}
 	form {
 	width: 50%;
 	translate: -8%;
@@ -447,7 +463,7 @@ label {
 		    opacity: 0;
 		    visibility: hidden;
 		    transition: opacity 0.5s ease-in-out, visibility 0s .5s;
-		    min-height: 0;
+		    max-height: 100vh;
 		    flex-grow: 1;
 	 	    overflow-y: auto;
 	    }
