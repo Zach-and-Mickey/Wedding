@@ -383,6 +383,11 @@ label {
 	input[type='number'] {
 	    text-align: center;
 	}
+    #registry-background {
+        background-image: url('registry-background.png');
+        background-position: bottom;
+        background-size: cover;
+    }
 	@media only screen and (max-width: 768px) {
 	#paypal-form-fields-container-WKZBTN5WE4VUQ {
 		display: flex;
