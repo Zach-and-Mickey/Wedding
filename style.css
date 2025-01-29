@@ -590,6 +590,7 @@ label {
 		    opacity: 0;
 		    visibility: hidden;
 		    transition: opacity 0.5s ease-in-out, visibility 0s .5s;
+		    max-height: 100vh;
 		    flex-grow: 1;
 	      	    overflow-y: auto;
 	    }
