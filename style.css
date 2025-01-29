@@ -110,7 +110,9 @@ font-size: 1.5em;
 
         .carousel-image {
             width: 25vw; /* Regular width */
-            height: auto; /* Regular height */
+   	    height: auto;
+    	    max-height: 290PX;
+    	    max-width: 250PX;
             object-fit: cover;
             padding: 0; /* Space between images */
             border-radius: 25px;
@@ -194,7 +196,8 @@ font-size: 1.5em;
 	}
 .carousel-image {
     width: 50vw;
-    height: 40vh;
+    height: AUTO;
+    max-height: 207PX;
     object-fit: cover;
     margin: 10px;
     border-radius: 25px;
