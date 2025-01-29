@@ -384,7 +384,9 @@ label {
 	    text-align: center;
 	}
     #registry-background {
+	display: flex;
         background-image: url('registry-background.png');
+	width: 100%;
         background-position: bottom;
         background-size: cover;
     }
@@ -394,7 +396,7 @@ label {
 	    text-align: center;
 	    justify-content: center;
 	    align-items: center;
-	    translate: -14%;
+	    translate: -8%;
 	}
 	form {
 	width: 50%;
