@@ -400,6 +400,7 @@ label {
         background-size: 100vw 50vh;
 	background-repeat: no-repeat;
         position: absolute;
+	z-index:-1;
     }
 	@media only screen and (max-width: 768px) {
 	#paypal-form-fields-container-WKZBTN5WE4VUQ {
@@ -474,14 +475,15 @@ label {
 		    opacity: 0;
 		    visibility: hidden;
 		    transition: opacity 0.5s ease-in-out, visibility 0s .5s;
-		    scale:.1;
-		    max-height: 100vh;
+		    scale:.01;
+		    max-height: 10vh;
 	    }
 	    .active {
 		    opacity:1;
 		    scale:1;
 		    visibility: visible;
 		    transition: opacity .5s ease-in-out, visibility 0s;
+		    max-height: 100vh;
 	    }
 		/* MENU BUTTON BLOCK */
         .menu-btn {
@@ -619,13 +621,14 @@ label {
 		    opacity: 0;
 		    visibility: hidden;
 		    transition: opacity 0.5s ease-in-out, visibility 0s .5s;
-		    scale:.1;
-	      	    max-height: 100vh;
+		    scale:.01;
+	      	    max-height: 10vh;
 	    }
 	    .active {
 		    opacity:1;
 		    visibility: visible;
 		    scale:1;
+		    max-height: 100vh;
 		    transition: opacity .5s ease-in-out, visibility 0s;
 	    }
 }
@@ -719,15 +722,16 @@ label {
 		    position: absolute;
 		    opacity: 0;
 		    visibility: hidden;
-		    scale:.1;
+		    scale:.01;
 		    transition: opacity 0.5s ease-in-out, visibility 0s .5s;
 	 	    max-width: 100%;
-		    max-height: 100vh;
+		    max-height: 10vh;
 	    }
 	    .active {
 		    opacity:1;
 		    visibility: visible;
 		    scale:1;
+		    max-height: 100vh;
 		    transition: opacity .5s ease-in-out, visibility 0s;
 
 	    }
