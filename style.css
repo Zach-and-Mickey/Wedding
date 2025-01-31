@@ -393,7 +393,11 @@ label {
 	}
     #registry-background {
 	display: flex;
-        background-image: url('registry-background.png');
+    background-image: linear-gradient(
+		rgba(0,0,0,.3),
+		rgba(0,0,0,.3)
+		),
+		url(registry-background.png);
 	width: 100vw;
 	height: 100vh;
         background-position: bottom;
@@ -412,7 +416,11 @@ label {
 	}
 	#registry-background {
     display: flex;
-    background-image: url(registry-background.png);
+    background-image: linear-gradient(
+		rgba(0,0,0,.5),
+		rgba(0,0,0,.5),
+		),
+		url(registry-background.png);
     width: 100VW;
     HEIGHT: 50%;
     background-position: bottom CENTER;
@@ -648,11 +656,13 @@ label {
     z-index: 0;
 }
 
-    p {
-        font-size: clamp(.90em,1.1em,2vw);
-	margin-top: 15vh;
+    p.first {
+        margin-top: 15vh;
     }
-
+    p {
+	font-size: clamp(1em,2vw,2em);
+	margin: 4% 12vw;
+    }
     h1 {
         font-size: 1.2em;
     }
@@ -723,7 +733,7 @@ label {
 		    opacity: 0;
 		    visibility: hidden;
 		    scale:.01;
-		    transition: opacity 0.5s ease-in-out, visibility 0s .5s;
+		    transition: opacity 1s ease-in-out, visibility 0s .5s;
 	 	    max-width: 100%;
 		    max-height: 10vh;
 	    }
@@ -732,7 +742,7 @@ label {
 		    visibility: visible;
 		    scale:1;
 		    max-height: 100vh;
-		    transition: opacity .5s ease-in-out, visibility 0s;
+		    transition: opacity 1s ease-in-out, visibility 0s;
 
 	    }
 }
