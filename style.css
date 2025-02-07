@@ -306,7 +306,7 @@ input[type="checkbox"] {
 /* Label for Yes/No checkboxes */
 label {
     font-size: 1em;
-    margin-right: 2%;  /* Space between labels */
+    margin: 2%;  /* Space between labels */
 }
 
 /* Container for the family members */
