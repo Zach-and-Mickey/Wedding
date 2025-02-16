@@ -49,14 +49,14 @@ body {
 }
 
 #header button:hover {
-    background-color: rgb(80,200,120);
+    background-color: #C5FFC9;
     color: rgb(254,130,140);
     border-radius: 25px;
     text-shadow: 3px 3px 3px rgb(0,0,0);
     transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover transition */
 }
 #header button.active {    
-    background-color: rgb(80,200,120);
+    background-color: #C5FFC9;
     color: rgb(254,130,140);
     border-radius: 25px;
     text-shadow: 3px 3px 3px rgb(0,0,0);
@@ -234,11 +234,11 @@ font-size: 1.5em;
         #search {
             padding: .5%;
 			font-size: 1.75em;
-			background-color: rgb(80,200,120);
+			background-color: #C5FFC9;
 			color: white;
 			border-radius: 20px;
 			width: clamp(195px,50vw,380px);
-			border: 2px solid white;
+			border: 3px solid white;
 			text-align: center;
         }
 		#rsvp-countdown {
@@ -300,7 +300,7 @@ font-size: 1.5em;
 input[type="checkbox"] {
     transform: scale(1.5);  /* Increase checkbox size */
     margin-right: 2%;  /* Space between checkbox and label */
-    accent-color: rgb(80, 200, 120);
+    accent-color: #C5FFC9;
 }
 
 /* Label for Yes/No checkboxes */
@@ -318,10 +318,10 @@ label {
 #email{
 	margin: 5vh;
 	padding: 1vh;
-	background-color: rgb(80,200,120);
+	background-color: #C5FFC9;
 	color: white;
 	border-radius: 20px;
-	border: 2px solid white;
+	border: 3px solid white;
 	text-align: center;
 }
 		/*----------- PHONE SCREEN STYLING----------------*/
@@ -367,7 +367,7 @@ label {
 	    transition: color .3s ease;
 	}
 	.link-container a:hover {
-	    color: blue;
+	    color: #C5FFC9;
 	}
 			/* FUND STYLES*/
 	.note {
@@ -449,6 +449,13 @@ label {
 	    <!-- text-align:left; -->
 	    <!-- margin-left: 2%; -->
 	}
+	.venue-title a {
+	    color: white;
+	    transition: color .3s ease;
+	}
+	.venue-title a:hover {
+	    color: rgb(254,130,140);
+	}
 	.answers {
 	    font-size: clamp(.75em,2em,3vw);
 		margin: 0% 15% 5% 15%;
@@ -467,8 +474,13 @@ label {
 	.questions {
 			margin: 0% 15% 5% 15%;
 	}
+	.venue-title {
+		margin: 2% 13% 4% 13%;
+		text-decoration: underline;
+		font-size: clamp(1em,4em,3vw);
+	}
 	.venue {
-		margin: 5VW 15VW 5VW 15VW; 
+		margin: 0% 13% 5% 13%; 
 	}
 	@media screen and (max-width: 768px) {
     .intro {
