@@ -92,6 +92,8 @@ An email confirmation will be sent after your RSVP is submitted to confirm your 
 	<h2>Venue Information</h2>
 	<p class='venue-title'><a href=https://theriversranch.com/ target='_blank'>The Rivers Ranch</a></p>
 	<p class='venue'>1959 Hwy 42 N <br>Jackson, GA</p>
+	<h2 class='rules'>Venue Details</h2>
+	<p class='rules-info'>The ceremony will be held outside with an indoor reception to follow. <br><br> No smoking or vaping allowed on venue property. <br><br> Please do not pet or feed the animals on the farm. </p>
 	<h2 class='questions'>Frequently Asked Questions</h2>
 	<h3>When should I arrive?</h3>
 	<p class="answers">The wedding starts at 5:00 P.M. Guests can begin arriving 30 minutes prior! Any late arrivals can
@@ -170,7 +172,7 @@ An email confirmation will be sent after your RSVP is submitted to confirm your 
         const autocompleteContainer = document.getElementById('autocompleteSuggestions');
         autocompleteContainer.innerHTML = ''; // Clear previous suggestions
 
-        if (searchValue === '') {
+        if (searchValue.length < 3) {
 		autocompleteContainer.innerHTML = '';
  		familyMembersContainer.innerHTML = '';
             return; // Exit early if search value is empty

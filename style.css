@@ -1,4 +1,4 @@
-/* green = rgb(80,200,120); */
+/* green = #C5FFC9; */
 /* pink = rgb(254,130,140); */
 /* ivory = #FFFFF0; */
 @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Norican&family=Petit+Formal+Script&display=swap');
@@ -234,11 +234,11 @@ font-size: 1.5em;
         #search {
             padding: .5%;
 			font-size: 1.75em;
-			background-color: #C5FFC9;
+			background-color: white;
 			color: white;
 			border-radius: 20px;
 			width: clamp(195px,50vw,380px);
-			border: 3px solid white;
+			border: 7px solid #C5FFC9;
 			text-align: center;
         }
 		#rsvp-countdown {
@@ -318,10 +318,10 @@ label {
 #email{
 	margin: 5vh;
 	padding: 1vh;
-	background-color: #C5FFC9;
+	background-color: white;
 	color: white;
 	border-radius: 20px;
-	border: 3px solid white;
+	border: 7px solid #C5FFC9;
 	text-align: center;
 }
 		/*----------- PHONE SCREEN STYLING----------------*/
@@ -473,6 +473,7 @@ label {
 	}
 	.questions {
 			margin: 0% 15% 5% 15%;
+			color:#C5FFC9;
 	}
 	.venue-title {
 		margin: 2% 13% 4% 13%;
@@ -480,7 +481,8 @@ label {
 		font-size: clamp(1em,4em,3vw);
 	}
 	.venue {
-		margin: 0% 13% 5% 13%; 
+		margin: 0% 13% 5% 13%;
+		font-size: clamp(1em,2vw,2em);
 	}
 	@media screen and (max-width: 768px) {
     .intro {
