@@ -239,7 +239,7 @@ font-size: 1.5em;
             padding: .5%;
 			font-size: 1.75em;
 			background-color: white;
-			color: white;
+			color: black;
 			border-radius: 20px;
 			width: clamp(195px,50vw,380px);
 			border: 7px solid #C5FFC9;
