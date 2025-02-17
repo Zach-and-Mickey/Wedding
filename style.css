@@ -489,8 +489,8 @@ label {
 		font-size: clamp(1em,4em,3vw);
 	}
 	.venue {
-		margin: 0% 13% 5% 13%;
 		font-size: clamp(1em,2vw,2em);
+		color: #FFFFF0;
 	}
 	@media screen and (max-width: 768px) {
     .intro {
