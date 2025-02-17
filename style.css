@@ -127,6 +127,7 @@ font-size: 1.5em;
         }
 
         .left-arrow, .right-arrow {
+	    display: inline;
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -199,6 +200,9 @@ font-size: 1.5em;
 		#countdown {
 		font-size: 5vw;
 	}
+		.left-arrow, .right-arrow {
+			display: none;
+		}
 .carousel-image {
     width: 50vw;
     height: AUTO;
