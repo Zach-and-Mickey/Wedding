@@ -307,14 +307,14 @@ font-size: 1.5em;
 /* Style for the Yes/No checkboxes */
 input[type="checkbox"] {
     transform: scale(1.5);  /* Increase checkbox size */
-    margin-right: 2%;  /* Space between checkbox and label */
     accent-color: #C5FFC9;
 }
 
 /* Label for Yes/No checkboxes */
 label {
     font-size: 1em;
-    margin: 2%;  /* Space between labels */
+    margin-right: 1.5vw;  /* Space between labels */
+    margin-left: 1.5vw;
 }
 
 /* Container for the family members */
