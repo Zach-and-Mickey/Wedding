@@ -436,11 +436,11 @@ document.getElementById('submitBtn').addEventListener('click', function(e) {
         const touchEndX = event.changedTouches[0].clientX;
         const distance = touchStartX - touchEndX;
 
-        if (distance > 50) {
+        if (distance > 20) {
             // Swipe left (move to next image)
             currentIndex = (currentIndex + 1) % images.length;
             updateImages();
-        } else if (distance < -50) {
+        } else if (distance < -20) {
             // Swipe right (move to previous image)
             currentIndex = (currentIndex - 1 + images.length) % images.length;
             updateImages();
@@ -448,10 +448,8 @@ document.getElementById('submitBtn').addEventListener('click', function(e) {
     }
 
     // Attach touch event listeners to the image container for mobile devices
-    if ('ontouchstart' in window) {
-        imageContainer.addEventListener('touchstart', handleTouchStart);
-        imageContainer.addEventListener('touchend', handleTouchEnd);
-    }
+    imageContainer.addEventListener('touchstart', handleTouchStart);
+    imageContainer.addEventListener('touchend', handleTouchEnd);
 
     // Event listeners for arrow buttons (for desktop)
     leftArrow.addEventListener('click', moveLeft);
