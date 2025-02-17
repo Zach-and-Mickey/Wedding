@@ -372,6 +372,8 @@ document.getElementById('submitBtn').addEventListener('click', function(e) {
 
     // Get DOM elements
     const imageContainer = document.getElementById('imageContainer');
+    const leftArrow = document.getElementById('leftArrow');
+    const rightArrow = document.getElementById('rightArrow');
 
     // Function to update images
     function updateImages() {
@@ -411,13 +413,25 @@ document.getElementById('submitBtn').addEventListener('click', function(e) {
         }, 550); // This delay should match the transition time of the translate (500ms + small delay)
     }
 
-    // Function to handle touch start
+    // Function to handle left arrow click (for desktop)
+    function moveLeft() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length; // Decrease index
+        updateImages();
+    }
+
+    // Function to handle right arrow click (for desktop)
+    function moveRight() {
+        currentIndex = (currentIndex + 1) % images.length; // Increase index
+        updateImages();
+    }
+
+    // Function to handle touch start (for mobile)
     let touchStartX = 0;
     function handleTouchStart(event) {
         touchStartX = event.touches[0].clientX;
     }
 
-    // Function to handle touch end
+    // Function to handle touch end (for mobile)
     function handleTouchEnd(event) {
         const touchEndX = event.changedTouches[0].clientX;
         const distance = touchStartX - touchEndX;
@@ -433,9 +447,15 @@ document.getElementById('submitBtn').addEventListener('click', function(e) {
         }
     }
 
-    // Attach touch event listeners to the image container
-    imageContainer.addEventListener('touchstart', handleTouchStart);
-    imageContainer.addEventListener('touchend', handleTouchEnd);
+    // Attach touch event listeners to the image container for mobile devices
+    if ('ontouchstart' in window) {
+        imageContainer.addEventListener('touchstart', handleTouchStart);
+        imageContainer.addEventListener('touchend', handleTouchEnd);
+    }
+
+    // Event listeners for arrow buttons (for desktop)
+    leftArrow.addEventListener('click', moveLeft);
+    rightArrow.addEventListener('click', moveRight);
 
     // Initialize the carousel
     updateImages();
