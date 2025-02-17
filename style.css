@@ -225,9 +225,9 @@ font-size: 1.5em;
 	}
         #submitBtn {
             background-color: white;
-	    font-size: 1em;
+	    font-size: clamp(13px, 3.5vw, 30px);
 	    color: black;
-            border: 2px solid #C5FFC9;
+            border: 6px inset #C5FFC9;
             cursor: pointer;
 	    margin: 2%;
 	    border-radius: 25px;
