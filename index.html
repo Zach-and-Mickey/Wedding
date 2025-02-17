@@ -364,72 +364,101 @@ document.getElementById('submitBtn').addEventListener('click', function(e) {
 
 	showTab('home');
     </script>
- <script>
-        // Array of image sources
-        const images = ['IMG1.jpg', 'IMG2.jpg', 'IMG3.jpg', 'IMG4.jpg', 'IMG5.jpg','IMG6.jpg','IMG7.jpg'];
-        let currentIndex = 0; // The index of the current image
 
-        // Get DOM elements
-        const imageContainer = document.getElementById('imageContainer');
-        const leftArrow = document.getElementById('leftArrow');
-        const rightArrow = document.getElementById('rightArrow');
+<script>
+    // Array of image sources
+    const images = ['IMG1.jpg', 'IMG2.jpg', 'IMG3.jpg', 'IMG4.jpg', 'IMG5.jpg', 'IMG6.jpg', 'IMG7.jpg'];
+    let currentIndex = 0; // The index of the current image
 
-        // Function to update images
-        function updateImages() {
-            // Get the three images
-            const imgElements = imageContainer.querySelectorAll('.carousel-image');
+    // Get DOM elements
+    const imageContainer = document.getElementById('imageContainer');
+    const leftArrow = document.getElementById('leftArrow');
+    const rightArrow = document.getElementById('rightArrow');
 
-            // Set the src attributes for each image
-            imgElements[0].src = images[(currentIndex - 1 + images.length) % images.length];
-            imgElements[1].src = images[currentIndex];
-            imgElements[2].src = images[(currentIndex + 1) % images.length];
+    // Function to update images
+    function updateImages() {
+        // Get the three images
+        const imgElements = imageContainer.querySelectorAll('.carousel-image');
 
-            // Reset all images to their base state (before transition)
-            imgElements.forEach(img => {
-                img.style.transition = 'none'; // Remove transition temporarily
-                img.style.transform = 'translateX(0)'; // Reset position
-            });
+        // Set the src attributes for each image
+        imgElements[0].src = images[(currentIndex - 1 + images.length) % images.length];
+        imgElements[1].src = images[currentIndex];
+        imgElements[2].src = images[(currentIndex + 1) % images.length];
 
-            // Apply only the translateX transformation for initial positioning
-            setTimeout(() => {
-                imgElements[0].style.transition = 'transform .5s ease'; // Apply transition for movement
-                imgElements[1].style.transition = 'transform .5s ease'; 
-                imgElements[2].style.transition = 'transform .5s ease';
+        // Reset all images to their base state (before transition)
+        imgElements.forEach(img => {
+            img.style.transition = 'none'; // Remove transition temporarily
+            img.style.transform = 'translateX(0)'; // Reset position
+        });
 
-                imgElements[0].style.transform = 'translateX(-10vw)';  // Left image moves to the left
-                imgElements[1].style.transform = 'translateX(0)';       // Center image remains centered
-                imgElements[2].style.transform = 'translateX(10vw)';   // Right image moves to the right
-            }, 50); // Delay before starting the translation
+        // Apply only the translateX transformation for initial positioning
+        setTimeout(() => {
+            imgElements[0].style.transition = 'transform .5s ease'; // Apply transition for movement
+            imgElements[1].style.transition = 'transform .5s ease';
+            imgElements[2].style.transition = 'transform .5s ease';
 
-            // After the translate transform, apply scaling to the center image
-            setTimeout(() => {
-                imgElements[1].style.transition = 'transform .5s ease'; // Apply transition for scaling
-                imgElements[1].style.transform = 'scale(1.4)'; // Apply scaling to center image
+            imgElements[0].style.transform = 'translateX(-10vw)';  // Left image moves to the left
+            imgElements[1].style.transform = 'translateX(0)';       // Center image remains centered
+            imgElements[2].style.transform = 'translateX(10vw)';    // Right image moves to the right
+        }, 50); // Delay before starting the translation
 
-                // Ensure the translateX is kept intact to maintain spacing
-                imgElements[0].style.transform = 'translateX(-10vw)';
-                imgElements[2].style.transform = 'translateX(10vw)';
-            }, 550); // This delay should match the transition time of the translate (500ms + small delay)
-        }
+        // After the translate transform, apply scaling to the center image
+        setTimeout(() => {
+            imgElements[1].style.transition = 'transform .5s ease'; // Apply transition for scaling
+            imgElements[1].style.transform = 'scale(1.4)'; // Apply scaling to center image
 
-        // Function to handle left arrow click
-        function moveLeft() {
-            currentIndex = (currentIndex - 1 + images.length) % images.length; // Decrease index
-            updateImages();
-        }
+            // Ensure the translateX is kept intact to maintain spacing
+            imgElements[0].style.transform = 'translateX(-10vw)';
+            imgElements[2].style.transform = 'translateX(10vw)';
+        }, 550); // This delay should match the transition time of the translate (500ms + small delay)
+    }
 
-        // Function to handle right arrow click
-        function moveRight() {
-            currentIndex = (currentIndex + 1) % images.length; // Increase index
-            updateImages();
-        }
-
-        // Event listeners for arrow keys
-        leftArrow.addEventListener('click', moveLeft);
-        rightArrow.addEventListener('click', moveRight);
-
-        // Initialize the carousel
+    // Function to handle left arrow click (for desktop)
+    function moveLeft() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length; // Decrease index
         updateImages();
-    </script>
+    }
+
+    // Function to handle right arrow click (for desktop)
+    function moveRight() {
+        currentIndex = (currentIndex + 1) % images.length; // Increase index
+        updateImages();
+    }
+
+    // Function to handle touch start (for mobile)
+    let touchStartX = 0;
+    function handleTouchStart(event) {
+        touchStartX = event.touches[0].clientX;
+    }
+
+    // Function to handle touch end (for mobile)
+    function handleTouchEnd(event) {
+        const touchEndX = event.changedTouches[0].clientX;
+        const distance = touchStartX - touchEndX;
+
+        if (distance > 50) {
+            // Swipe left (move to next image)
+            currentIndex = (currentIndex + 1) % images.length;
+            updateImages();
+        } else if (distance < -50) {
+            // Swipe right (move to previous image)
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateImages();
+        }
+    }
+
+    // Attach touch event listeners to the image container for mobile devices
+    if ('ontouchstart' in window) {
+        imageContainer.addEventListener('touchstart', handleTouchStart);
+        imageContainer.addEventListener('touchend', handleTouchEnd);
+    }
+
+    // Event listeners for arrow buttons (for desktop)
+    leftArrow.addEventListener('click', moveLeft);
+    rightArrow.addEventListener('click', moveRight);
+
+    // Initialize the carousel
+    updateImages();
+</script>
 </body>
 </html>
