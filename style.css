@@ -199,6 +199,9 @@ font-size: 1.5em;
 		#countdown {
 		font-size: 5vw;
 	}
+		.left-arrow, .right-arrow {
+			display: none;
+		}
 .carousel-image {
     width: 50vw;
     height: AUTO;
