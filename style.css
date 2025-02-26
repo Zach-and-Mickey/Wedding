@@ -189,8 +189,8 @@ font-size: 1.5em;
 	   align-items: center;
 	   justify-content: center;
 	}
-	#homepage_link {
-		margin-bottom 6%;
+	#homepageLink {
+		margin-bottom: 6%;
 	}
 	@media only screen and (max-width: 768px) {
 	  #home h1 {
