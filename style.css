@@ -168,13 +168,13 @@ font-size: 1.5em;
 		margin-top: .5vw;
 		margin-bottom: 2vw;
 	}
-	a {
+	.gallery a {
 		color: #C5FFC9;
 	}
-	a:hover {
+	.gallery a:hover {
 		color: gray;
 	}
-	a:visited {
+	.gallery a:visited {
 		color: #C5FFC9
 	}
 	#name {
@@ -472,6 +472,9 @@ label {
 	}
 	.venue-title a:hover {
 	    color: rgb(254,130,140);
+	}
+	.venue-title a:visited {
+		color: white;
 	}
 	.answers {
 	    font-size: clamp(.75em,2em,3vw);
