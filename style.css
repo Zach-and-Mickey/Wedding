@@ -168,13 +168,14 @@ font-size: 1.5em;
 		margin-top: .5vw;
 		margin-bottom: 2vw;
 	}
-	.gallery a {
+	.gallery {
 		color: #C5FFC9;
+    transition: color .4s;
 	}
-	.gallery a:hover {
-		color: gray;
+	.gallery:hover {
+		color: gray !important;
 	}
-	.gallery a:visited {
+	.gallery:visited {
 		color: #C5FFC9
 	}
 	#name {
