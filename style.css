@@ -190,7 +190,7 @@ font-size: 1.5em;
 	   justify-content: center;
 	}
 	#homepageLink {
-		margin-bottom: 6%;
+		padding-bottom: 6%;
 	}
 	@media only screen and (max-width: 768px) {
 	  #home h1 {
@@ -209,6 +209,7 @@ font-size: 1.5em;
 		}
 		#welcome {
 		font-size: 5vw;
+		width: 80%;
 	}
 		#countdown {
 		font-size: 5vw;
