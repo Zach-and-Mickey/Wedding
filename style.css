@@ -189,6 +189,9 @@ font-size: 1.5em;
 	   align-items: center;
 	   justify-content: center;
 	}
+	#homepage_link {
+		margin-bottom 6%;
+	}
 	@media only screen and (max-width: 768px) {
 	  #home h1 {
 	   font-size: 5vw;
@@ -485,6 +488,7 @@ label {
 	    padding: 2% 5% 2% 5%;
 	}
 	.last-answers {
+	    font-size: clamp(.75em, 2em, 3vw);
 	    margin: 0;
 	    padding: 0% 15% 10% 15%;
 	}
