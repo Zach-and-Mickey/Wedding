@@ -459,7 +459,6 @@ label {
 			/* FAQ STYLES*/
 	#faq h2 {
 	    text-decoration: underline;
-		color: rgb(254,130,140);
 		font-size: clamp(1em,3em,4vw);
 		margin: 5% 15% 0% 15%;
 	}
