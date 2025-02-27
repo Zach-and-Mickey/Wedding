@@ -472,6 +472,9 @@ label {
 	    <!-- text-align:left; -->
 	    <!-- margin-left: 2%; -->
 	}
+	.email-link {
+		color: #FFFFF0;
+	}
 	.venue-title a {
 	    color: #C5FFC9;
 	    transition: color .4s ease;
