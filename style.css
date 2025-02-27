@@ -459,8 +459,9 @@ label {
 			/* FAQ STYLES*/
 	#faq h2 {
 	    text-decoration: underline;
+		color: #C5FFC9;
 		font-size: clamp(1em,3em,4vw);
-		margin: 0% 15% 0% 15%;
+		margin: 5% 15% 0% 15%;
 	}
 	#faq h3 {
 	    font-family: 'Norican', serif;
@@ -508,7 +509,7 @@ label {
 	}
 	.venue {
 		font-size: clamp(1em,2vw,2em);
-		color: #FFFFF0;
+		color: #C5FFC9;
 	}
 	@media screen and (max-width: 768px) {
     .intro {
