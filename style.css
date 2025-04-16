@@ -267,6 +267,9 @@ font-size: 1.5em;
 		margin: 1vh;
 		padding: 1vh;
 		}
+		.countdown {
+			margin-top: 20vh;
+		}
 
 		.deadline {
 		color: rgb(254,130,140);
