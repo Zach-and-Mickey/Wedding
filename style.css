@@ -405,8 +405,10 @@ label {
 	    margin: 5%;
 	    margin-top: 0;
 	}
+	.css-s2u4oi{
+		justify-content: center;
+	}
 	#paypal-container-button {
-	    display: flex;
 	    text-align: center;
 	    justify-content: center;
 	    align-items: center;
