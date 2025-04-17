@@ -452,8 +452,9 @@ label {
     BOTTOM: 0;
 	}
 	form {
-	width: 50%;
-	translate: -8%;
+	width: 50vw;
+	translate: 10%;
+	margin:auto;
 	justify-content: center;
 	align-items: center;
 	}
